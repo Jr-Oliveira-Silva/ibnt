@@ -1,0 +1,22 @@
+library shared;
+
+export 'package:app_ibnt/src/app_imports.dart';
+export 'package:app_ibnt/src/shared/base_entities/base_user_entity.dart';
+export 'package:app_ibnt/src/shared/enums/user_role.dart';
+export 'package:app_ibnt/src/shared/errors/base_exception.dart';
+export 'package:app_ibnt/src/shared/models/date_model.dart';
+export 'package:app_ibnt/src/shared/themes/app_themes.dart';
+export 'package:app_ibnt/src/shared/utils/app_toast.dart';
+export 'package:app_ibnt/src/shared/utils/date_biding_functions.dart';
+export 'package:app_ibnt/src/shared/utils/logger.dart';
+export 'package:app_ibnt/src/shared/widgets/appbar/app_bar_widget.dart';
+export 'package:app_ibnt/src/shared/widgets/buttons/app_button.dart';
+export 'package:app_ibnt/src/shared/widgets/date/app_date_widget.dart';
+export 'package:app_ibnt/src/shared/widgets/form/app_drop_down.dart';
+export 'package:app_ibnt/src/shared/widgets/form/app_search_widget.dart';
+export 'package:app_ibnt/src/shared/widgets/form/app_text_field.dart';
+export 'package:app_ibnt/src/shared/widgets/form/text_field_label.dart';
+export 'package:app_ibnt/src/shared/widgets/logo_component.dart';
+export 'package:app_ibnt/src/shared/widgets/month_title_widget.dart';
+export 'package:app_ibnt/src/shared/widgets/navigation/app_drawer.dart';
+export 'package:app_ibnt/src/shared/widgets/navigation/app_nav_bar_widget.dart';

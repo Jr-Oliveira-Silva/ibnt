@@ -1,0 +1,1 @@
+enum BibleMessageType { created, generated }

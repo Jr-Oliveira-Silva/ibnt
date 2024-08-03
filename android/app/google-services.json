@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1002561958577",
+    "project_id": "ibnt-3bcff",
+    "storage_bucket": "ibnt-3bcff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002561958577:android:cdc65d03cae1e99b7fe890",
+        "android_client_info": {
+          "package_name": "br.com.jr.app_ibnt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002561958577-d78m297tc2lpcons9icp7hoqne6kvb07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.jr.app_ibnt",
+            "certificate_hash": "ee1325814a8a4934c82d1f7fd6a824dc2e06ed47"
+          }
+        },
+        {
+          "client_id": "1002561958577-e41ucetr7ro44uea6r0j3kfafkincem1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkizDdgQzj_KkYefmwIJFyekGzT-B1a0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002561958577-e41ucetr7ro44uea6r0j3kfafkincem1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1002561958577-u1im0pfiidgmphnou77v4tics0j2jc67.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.jr.appIbnt"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002561958577:android:81f4e9b9fc66cb4b7fe890",
+        "android_client_info": {
+          "package_name": "br.com.jr.appibnt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002561958577-eljndo24cgsdtoth2bdot27undpfanhf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.jr.appibnt",
+            "certificate_hash": "ee1325814a8a4934c82d1f7fd6a824dc2e06ed47"
+          }
+        },
+        {
+          "client_id": "1002561958577-e41ucetr7ro44uea6r0j3kfafkincem1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkizDdgQzj_KkYefmwIJFyekGzT-B1a0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002561958577-e41ucetr7ro44uea6r0j3kfafkincem1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1002561958577-u1im0pfiidgmphnou77v4tics0j2jc67.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.jr.appIbnt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

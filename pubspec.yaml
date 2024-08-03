@@ -1,0 +1,61 @@
+name: app_ibnt
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  firebase_auth: ^4.17.8
+  flutter_bloc: ^8.1.5
+  flutter_modular: ^6.3.3
+  firebase_core: ^2.27.0
+  image_picker: ^1.0.8
+  google_sign_in: ^6.2.1
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  shared_preferences: ^2.2.3
+  uuid: ^3.0.7
+  firebase_messaging: ^14.7.19
+  http: ^1.2.0
+  dio: ^5.4.3+1
+  flutter_local_notifications: ^17.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  mocktail: ^1.0.1
+  flutter_launcher_icons: ^0.13.1
+  firebase_auth_mocks: ^0.9.2
+  fake_cloud_firestore: ^2.4.8
+  bloc_test: ^9.1.7
+  mockito: ^5.4.4
+
+flutter_launcher_icons:
+  android: true
+  image_path_android: "assets/images/ibnt_playstore.png"
+  adaptative_icon_background: "#ffffff"
+  adaptative_icon_foreground: "assets/images/foreground_app_icon.png"
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Karma
+      fonts:
+        - asset: assets/Karma-Bold.ttf
+        - asset: assets/Karma-Light.ttf
+        - asset: assets/Karma-Medium.ttf
+        - asset: assets/Karma-Regular.ttf
+        - asset: assets/Karma-SemiBold.ttf
+
+  assets:
+    - assets/images/ibnt_logo.png
