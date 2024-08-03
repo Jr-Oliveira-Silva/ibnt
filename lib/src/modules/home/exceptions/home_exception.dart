@@ -13,6 +13,10 @@ class UserException extends HomeException {
   UserException({required super.exception});
 }
 
+class CreateEventException extends HomeException {
+  CreateEventException({required super.exception});
+}
+
 class ReactionException extends HomeException {
   ReactionException({required super.exception});
 }

@@ -266,4 +266,26 @@ class HomeRepository implements IHomeRepository {
       return left(RemoveReactionException(exception: "Não foi possível obter lista de reações."));
     }
   }
+
+  @override
+  Future<(HomeException?, EventEntity?)> createEvent(EventEntity event) async {
+    try {
+      final eventMap = event.toMap();
+      
+      final eventImage = eventMap.remove("imageField") as File;
+
+      final response = await _appClient.post("$API_URL/events", eventMap, headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.created) {
+        return (CreateEventException(exception: "A propriedade postDate não pode ser vazia ou nula."), null);
+      } else {
+        return (null, EventEntity());
+      }
+    } catch (e) {
+      throw CreateEventException(exception: "$e");
+    }
+  }
 }
