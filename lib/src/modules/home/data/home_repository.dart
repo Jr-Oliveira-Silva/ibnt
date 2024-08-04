@@ -283,10 +283,8 @@ class HomeRepository implements IHomeRepository {
         final message = response.body.toString();
         return (CreateEventException(exception: message), null);
       } else {
-        final body = jsonDecode(response.body);
-        final createdEvent = EventEntity.fromMap(body);
-        final result = await setEventImage(eventImage, createdEvent.id!);
-        return (null, result.$2 as EventEntity);
+        final createdEvent = EventEntity.fromMap(jsonDecode(response.body));
+        return await setEventImage(eventImage, createdEvent.id!);
       }
     } on HomeException catch (e) {
       if (e is SetEventImageException) {
