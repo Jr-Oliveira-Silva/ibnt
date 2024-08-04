@@ -271,7 +271,7 @@ class HomeRepository implements IHomeRepository {
   Future<(HomeException?, EventEntity?)> createEvent(EventEntity event) async {
     try {
       final eventMap = event.toMap();
-      
+
       final eventImage = eventMap.remove("imageField") as File;
 
       final response = await _appClient.post("$API_URL/events", eventMap, headers: {
@@ -280,12 +280,43 @@ class HomeRepository implements IHomeRepository {
       }) as Response;
 
       if (response.statusCode != HttpStatus.created) {
-        return (CreateEventException(exception: "A propriedade postDate não pode ser vazia ou nula."), null);
+        final message = response.body.toString();
+        return (CreateEventException(exception: message), null);
       } else {
-        return (null, EventEntity());
+        final body = jsonDecode(response.body);
+        final createdEvent = EventEntity.fromMap(body);
+        final result = await setEventImage(eventImage, createdEvent.id!);
+        return (null, result.$2 as EventEntity);
+      }
+    } on HomeException catch (e) {
+      if (e is SetEventImageException) {
+        return (e, null);
+      } else {
+        return (CreateEventException(exception: '$e'), null);
       }
     } catch (e) {
-      throw CreateEventException(exception: "$e");
+      return (CreateEventException(exception: '$e'), null);
+    }
+  }
+
+  Future<(HomeException?, EventEntity?)> setEventImage(File imageFile, String id) async {
+    try {
+      final response = await _appClient.formDataHandler(
+        imageFile,
+        "imageFile",
+        "$API_URL/events/images/$id",
+        'POST',
+        headers: {"authorization": "Bearer $user_token"},
+      ) as StreamedResponse;
+      if (response.statusCode != HttpStatus.ok) {
+        return (SetEventImageException(exception: "Erro ao definir imagem do evento $id."), null);
+      } else {
+        final body = jsonDecode(await response.stream.bytesToString());
+        final newEvent = EventEntity.fromMap(body);
+        return (null, newEvent);
+      }
+    } catch (e) {
+      throw SetEventImageException(exception: '$e');
     }
   }
 }

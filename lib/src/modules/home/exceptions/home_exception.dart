@@ -17,6 +17,10 @@ class CreateEventException extends HomeException {
   CreateEventException({required super.exception});
 }
 
+class SetEventImageException extends HomeException {
+  SetEventImageException({required super.exception});
+}
+
 class ReactionException extends HomeException {
   ReactionException({required super.exception});
 }
