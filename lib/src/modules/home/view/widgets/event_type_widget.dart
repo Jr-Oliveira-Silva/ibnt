@@ -51,7 +51,7 @@ class EventTypeWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(radius),
                         image: DecorationImage(
-                          image: NetworkImage(event.imageUrl ?? ""),
+                          image: NetworkImage(event.imageUrlPath()),
                           fit: BoxFit.fill,
                         ),
                       ),

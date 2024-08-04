@@ -16,11 +16,11 @@ class EventEntity extends TimeLineContent {
   factory EventEntity.fromMap(Map<String, dynamic> map) {
     return EventEntity(
       id: map["id"],
-      title: map['title'] != null ? map['title'] as String : null,
-      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
-      postDate: map['postDate'] != null ? map['postDate'] as String : null,
-      date: map['date'] != null ? map['date'] as String : null,
-      description: map['description'] != null ? map['description'] as String : null,
+      title: map['title'],
+      imageUrl: map['imageUrl'],
+      postDate: map['postDate'],
+      date: map['date'],
+      description: map['description'],
     );
   }
 
@@ -33,4 +33,6 @@ class EventEntity extends TimeLineContent {
       "description": description,
     };
   }
+
+  String imageUrlPath() => "$API_IMAGE_URL$imageUrl";
 }
