@@ -32,3 +32,4 @@ export 'package:app_ibnt/src/modules/home/view/widgets/bible_message_reactions_w
 export 'package:app_ibnt/src/modules/home/view/widgets/event_type_widget.dart';
 export 'package:app_ibnt/src/modules/home/view/widgets/loading_reaction_widget.dart';
 export 'package:app_ibnt/src/modules/home/view/widgets/message_type_widget.dart';
+export 'package:app_ibnt/src/modules/home/blocs/create_event_bloc/create_event_bloc.dart';

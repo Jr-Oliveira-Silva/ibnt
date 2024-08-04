@@ -7,4 +7,8 @@ sealed class CreateEventEvents extends Equatable {
   List<Object> get props => [];
 }
 
-class CreateEventEvent extends CreateEventEvents {}
+class CreateEventEvent extends CreateEventEvents {
+  final EventEntity event;
+
+  const CreateEventEvent(this.event);
+}
