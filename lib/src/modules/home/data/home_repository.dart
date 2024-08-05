@@ -272,7 +272,7 @@ class HomeRepository implements IHomeRepository {
     try {
       final eventMap = event.toMap();
 
-      final eventImage = eventMap.remove("imageField") as File;
+      final eventImage = eventMap.remove("imageField") as XFile;
 
       final response = await _appClient.post("$API_URL/events", eventMap, headers: {
         "content-type": "application/json",
@@ -297,7 +297,7 @@ class HomeRepository implements IHomeRepository {
     }
   }
 
-  Future<(HomeException?, EventEntity?)> setEventImage(File imageFile, String id) async {
+  Future<(HomeException?, EventEntity?)> setEventImage(XFile imageFile, String id) async {
     try {
       final response = await _appClient.formDataHandler(
         imageFile,

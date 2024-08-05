@@ -51,9 +51,9 @@ class AppHttpClient implements AppClient {
   }
 
   @override
-  Future<StreamedResponse> formDataHandler(File file, String fieldName, String url, String method, {Map<String, String>? headers}) async {
+  Future<StreamedResponse> formDataHandler(XFile file, String fieldName, String url, String method, {Map<String, String>? headers}) async {
     final request = MultipartRequest(method, Uri.parse(url));
-    final formFile = await MultipartFile.fromPath(fieldName, file.path, filename: file.path);
+    final formFile = await MultipartFile.fromPath(fieldName, file.path);
 
     formFile.contentType.change(type: "multipart/form-data");
     if (headers != null) {
@@ -64,14 +64,6 @@ class AppHttpClient implements AppClient {
     request.fields;
 
     final response = await request.send();
-    final byteStream = response.stream;
-    logger(
-      url: url,
-      method: request.method.toUpperCase(),
-      statusCode: response.statusCode,
-      logValue: await byteStream.bytesToString(),
-    );
-
     return response;
   }
 }

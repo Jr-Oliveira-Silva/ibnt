@@ -4,7 +4,7 @@ import 'package:app_ibnt/src/modules/home/home_imports.dart';
 class EventEntity extends TimeLineContent {
   String? title;
   String? imageUrl;
-  File? imageField;
+  XFile? imageField;
   String? postDate;
   String? date;
   String? description;

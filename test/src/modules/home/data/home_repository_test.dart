@@ -17,7 +17,7 @@ void main() {
       test(
         'fail to post a new event in api, and return a CreateEventException.',
         () async {
-          final imageField = File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
+          final imageField = XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
           final event = EventEntity(
             title: "Event Title",
             description: "Event Description",
@@ -52,7 +52,7 @@ void main() {
         'post a new Event in API and return a new EventEntity successfully.',
         () async {
           const setImageUrl = "$API_URL/events/images/dc32c7cf-5629-4e4e-65e5-08dcaaa89a10";
-          final imageField = File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
+          final imageField = XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
 
           final event = EventEntity(
             title: "Event Title",
@@ -112,7 +112,7 @@ void main() {
         () async {
           const setImageUrl = "$API_URL/events/images/dc32c7cf-5629-4e4e-65e5-08dcaaa89a10";
 
-          final imageField = File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
+          final imageField = XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
 
           when(() => client.formDataHandler(
                 imageField,
@@ -136,7 +136,7 @@ void main() {
         'set an image file as an event image based on a created Event and return a EventEntity successfully.',
         () async {
           const setImageUrl = "$API_URL/events/images/dc32c7cf-5629-4e4e-65e5-08dcaaa89a10";
-          final imageField = File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
+          final imageField = XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg");
 
           final eventJson = jsonEncode(
             {

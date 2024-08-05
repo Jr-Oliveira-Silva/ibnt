@@ -12,7 +12,7 @@ class EventTypeWidget extends StatelessWidget {
 
   final EventEntity event;
   final String memberId;
-  bool editable = false;
+  bool editable;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -36,7 +36,7 @@ class EventTypeWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Modular.to.pushNamed('./event');
+            Modular.to.pushNamed('./event',arguments: event);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),

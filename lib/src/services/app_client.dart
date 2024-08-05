@@ -5,5 +5,5 @@ abstract class AppClient {
   Future post(String url, Object requestBody, {Map<String, String>? headers});
   Future put(String url, Object body, {Map<String, String>? headers});
   Future delete(String url, {Object body, Map<String, String>? headers});
-  Future formDataHandler(File file, String fieldName, String url, String method, {Map<String, String>? headers});
+  Future formDataHandler(XFile file, String fieldName, String url, String method, {Map<String, String>? headers});
 }

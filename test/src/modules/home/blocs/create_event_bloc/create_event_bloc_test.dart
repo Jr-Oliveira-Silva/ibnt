@@ -1,5 +1,4 @@
 import 'package:app_ibnt/src/app_imports.dart';
-
 import '../../../../../mocks/home/home_repository_mock.dart';
 
 void main() {
@@ -22,7 +21,7 @@ void main() {
         description: 'EVENT DESCRIPTION',
         date: '08-08-2024',
         postDate: '08-08-2024',
-        imageField: File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
+        imageField: XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
         type: EntityType.event,
       );
       blocTest<CreateEventBloc, CreateEventStates>(
@@ -54,7 +53,7 @@ void main() {
                 description: 'EVENT DESCRIPTION',
                 date: '08-08-2024',
                 postDate: '08-08-2024',
-                imageField: File("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
+                imageField: XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
                 type: EntityType.event,
               )
             ),

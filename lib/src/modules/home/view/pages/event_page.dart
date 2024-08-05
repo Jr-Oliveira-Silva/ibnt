@@ -1,21 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app_ibnt/src/modules/home/home_imports.dart';
 
 class EventPage extends StatefulWidget {
-  const EventPage({super.key});
+  const EventPage({Key? key, required this.event}) : super(key: key);
+  final EventEntity event;
 
   @override
   State<EventPage> createState() => _EventPageState();
 }
 
 class _EventPageState extends State<EventPage> {
-  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final titleFontSize = height * 0.035;
-    final iconSize = height * 0.04;
     final pagePadding = width * 0.035;
+    final dateSection = widget.event.date?.split("T").first;
+    final eventDay = int.parse(dateSection!.split("-").last);
+    final eventMonth = int.parse(dateSection.split("-")[1]);
+    final eventYear = int.parse(dateSection.split("-").first);
+
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: const AppDrawer(),
@@ -31,28 +36,25 @@ class _EventPageState extends State<EventPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Nome do Evento",
+                    widget.event.title!,
                     style: TextStyle(
                       fontSize: titleFontSize,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.camera_alt,
-                      color: AppThemes.primaryColor1,
-                      size: iconSize,
-                    ),
-                  )
                 ],
               ),
               SizedBox(height: height * 0.02),
               EventTypeWidget(
                 memberId: "ID",
-                event: EventEntity(),
+                event: widget.event,
                 editable: true,
               ),
-              const AppDateWidget(),
+              FilledDateWidget(
+                  dateModel: DateModel(
+                day: eventDay,
+                month: eventMonth,
+                year: eventYear,
+              )),
               AppButton(
                 onTap: () {},
                 height: 60,
@@ -60,7 +62,7 @@ class _EventPageState extends State<EventPage> {
                 primaryColor: Colors.white,
                 backgroundColor: AppThemes.primaryColor1,
                 fontSize: 18,
-                text: "Adicionar",
+                text: "Editar",
               ),
               SizedBox(height: height * 0.02),
             ],
