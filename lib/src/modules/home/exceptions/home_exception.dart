@@ -21,6 +21,10 @@ class GetEventsException extends HomeException {
   GetEventsException({required super.exception});
 }
 
+class DeleteEventException extends HomeException {
+  DeleteEventException({required super.exception});
+}
+
 class SetEventImageException extends HomeException {
   SetEventImageException({required super.exception});
 }

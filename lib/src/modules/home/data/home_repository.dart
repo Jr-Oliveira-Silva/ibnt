@@ -123,6 +123,27 @@ class HomeRepository implements IHomeRepository {
     }
   }
 
+  @override
+  Future<(HomeException?, void)> deleteEvent(String eventId) async {
+    try {
+      final response = await _appClient.delete("$API_URL/events/$eventId", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.noContent) {
+        final message = response.body.toString();
+        return (DeleteEventException(exception: message), null);
+      } else {
+        return (null, null);
+      }
+    } on HomeException catch (e) {
+      return (DeleteEventException(exception: '$e'), null);
+    } catch (e) {
+      return (DeleteEventException(exception: '$e'), null);
+    }
+  }
+
   Future<(HomeException?, EventEntity?)> setEventImage(XFile imageFile, String id) async {
     try {
       final response = await _appClient.formDataHandler(

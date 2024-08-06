@@ -7,6 +7,7 @@ export 'package:app_ibnt/src/shared/errors/base_exception.dart';
 export 'package:app_ibnt/src/shared/models/date_model.dart';
 export 'package:app_ibnt/src/shared/themes/app_themes.dart';
 export 'package:app_ibnt/src/shared/utils/app_toast.dart';
+export 'package:app_ibnt/src/shared/utils/app_dialog.dart';
 export 'package:app_ibnt/src/shared/utils/date_biding_functions.dart';
 export 'package:app_ibnt/src/shared/utils/logger.dart';
 export 'package:app_ibnt/src/shared/widgets/appbar/app_bar_widget.dart';

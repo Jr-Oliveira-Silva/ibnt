@@ -118,7 +118,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
                     callAppToast(context, state.message);
                   }
                   if (state is CreateEventSuccessState) {
-                    Modular.to.navigate("/auth/home/");
+                    Modular.to.navigate("./events");
                   }
                 },
                 builder: (context, state) {

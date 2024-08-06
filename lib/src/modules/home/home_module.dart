@@ -15,6 +15,8 @@ class HomeModule extends Module {
     i.add(EventsReactionsBloc.new);
     i.add(BibleMessagesReactionsBloc.new);
     i.add(CreateEventBloc.new);
+    i.add(CommonEventBloc.new);
+    i.add(GetEventsBloc.new);
     i.add(DateCubit.new);
   }
 
@@ -49,7 +51,8 @@ class HomeModule extends Module {
     r.child('/events',
         child: (_) => MultiBlocProvider(
               providers:  [
-                BlocProvider(create: (context) => Modular.get<HomeBloc>()),
+                BlocProvider(create: (context) => Modular.get<CommonEventBloc>()),
+                BlocProvider(create: (context) => Modular.get<GetEventsBloc>()),
               ],
               child: const EventsPage(),
             ));

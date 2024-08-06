@@ -120,6 +120,44 @@ void main() {
   );
 
   group(
+    'DeleteEvent should',
+    () {
+      test(
+        'return a DeleteEventException',
+        () async {
+          when(() => client.delete(
+                "$API_URL/events/${HomeMockValues.eventEntity.id}",
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer((_) async => Response(jsonEncode("bla bla bla"), 400));
+
+          final (exception, _) = await repository.deleteEvent(HomeMockValues.eventEntity.id!);
+
+          expect(exception != null, equals(true));
+          expect(exception, isA<DeleteEventException>());
+        },
+      );
+      test(
+        'not return an Exception (void return here).',
+        () async {
+          when(() => client.delete(
+                "$API_URL/events/${HomeMockValues.eventEntity.id}",
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer((_) async => Response(HomeMockValues.eventsJsonList, 204));
+          final (exception, _) = await repository.deleteEvent(HomeMockValues.eventEntity.id!);
+
+          expect(exception == null, equals(true));
+        },
+      );
+    },
+  );
+
+  group(
     'SetEventImage should',
     () {
       test(

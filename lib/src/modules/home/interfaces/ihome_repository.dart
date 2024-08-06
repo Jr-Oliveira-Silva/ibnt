@@ -5,6 +5,7 @@ abstract class IHomeRepository {
   Future<Either<HomeException, TimeLineEntity>> fetchTimeline();
   Future<(HomeException?, EventEntity?)> createEvent(EventEntity event);
   Future<(HomeException?, List<EventEntity>?)> getEvents();
+  Future<(HomeException?, void)> deleteEvent(String eventId);
   Future<Either<HomeException, List<EventReactionResponse>>> setEventReaction(EventReaction reaction);
   Future<Either<HomeException, List<BibleMessageReactionResponse>>> setBibleMessageReaction(BibleMessageReaction reaction);
   Future<Either<HomeException, List<EventReactionResponse>>> getEventsReactions();

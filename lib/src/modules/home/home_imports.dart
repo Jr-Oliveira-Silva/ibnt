@@ -36,3 +36,5 @@ export 'package:app_ibnt/src/modules/home/blocs/create_event_bloc/create_event_b
 export 'package:image_picker/image_picker.dart';
 export 'package:app_ibnt/src/modules/home/view/pages/events_page.dart';
 export 'package:app_ibnt/src/modules/home/blocs/get_events_bloc/get_events_bloc.dart';
+export 'package:app_ibnt/src/modules/home/view/widgets/event_banner.dart';
+export 'package:app_ibnt/src/modules/home/blocs/common_event_bloc/common_event_bloc.dart';

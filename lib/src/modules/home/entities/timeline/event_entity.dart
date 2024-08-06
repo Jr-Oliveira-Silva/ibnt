@@ -35,4 +35,13 @@ class EventEntity extends TimeLineContent {
   }
 
   String imageUrlPath() => "$API_IMAGE_URL$imageUrl";
+
+  String eventDate() {
+    final dateSection = date?.split("T").first;
+    final eventDay = int.parse(dateSection!.split("-").last);
+    final eventMonth = int.parse(dateSection.split("-")[1]);
+    final eventYear = int.parse(dateSection.split("-").first);
+
+    return "$eventDay/$eventMonth/$eventYear";
+  }
 }
