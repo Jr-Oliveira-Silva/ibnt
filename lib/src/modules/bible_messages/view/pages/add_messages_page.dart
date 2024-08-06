@@ -11,7 +11,7 @@ class _AddMessagesPageState extends State<AddMessagesPage> {
   @override
   Widget build(BuildContext context) {
     String? memberId = Modular.args.params["memberId"];
-   
+
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final pagePadding = width * 0.035;
@@ -24,7 +24,30 @@ class _AddMessagesPageState extends State<AddMessagesPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        drawerOptions: [
+          AppDrawerTile(
+            tileName: 'Perfil',
+            leadingIcon: Icons.person_2_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Departamentos',
+            leadingIcon: Icons.file_copy_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Eventos',
+            leadingIcon: Icons.event,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Escalas',
+            leadingIcon: Icons.view_comfortable_outlined,
+            onTap: () {},
+          ),
+        ],
+      ),
       appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
       body: SizedBox(
         height: height,

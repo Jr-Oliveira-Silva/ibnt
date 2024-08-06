@@ -54,7 +54,33 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        drawerOptions: [
+          AppDrawerTile(
+            tileName: 'Perfil',
+            leadingIcon: Icons.person_2_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Departamentos',
+            leadingIcon: Icons.file_copy_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Eventos',
+            leadingIcon: Icons.event,
+            onTap: () {
+              Modular.to.pushNamed('./events');
+              Navigator.of(context).pop();
+            },
+          ),
+          AppDrawerTile(
+            tileName: 'Escalas',
+            leadingIcon: Icons.view_comfortable_outlined,
+            onTap: () {},
+          ),
+        ],
+      ),
       appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
       body: BlocBuilder(
         bloc: userBloc,

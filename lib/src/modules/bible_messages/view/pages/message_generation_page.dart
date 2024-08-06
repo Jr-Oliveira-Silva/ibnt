@@ -33,7 +33,30 @@ class _MessageGenerationPageState extends State<MessageGenerationPage> {
     final titleFontSize = height * 0.035;
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        drawerOptions: [
+          AppDrawerTile(
+            tileName: 'Perfil',
+            leadingIcon: Icons.person_2_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Departamentos',
+            leadingIcon: Icons.file_copy_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Eventos',
+            leadingIcon: Icons.event,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Escalas',
+            leadingIcon: Icons.view_comfortable_outlined,
+            onTap: () {},
+          ),
+        ],
+      ),
       appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
       body: SizedBox(
         height: height,

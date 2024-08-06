@@ -46,6 +46,13 @@ class HomeModule extends Module {
               ],
               child: EventPage(event: r.args.data),
             ));
+    r.child('/events',
+        child: (_) => MultiBlocProvider(
+              providers:  [
+                BlocProvider(create: (context) => Modular.get<HomeBloc>()),
+              ],
+              child: const EventsPage(),
+            ));
     r.child(
       '/notifications',
       child: (_) => const NotificationsPage(),

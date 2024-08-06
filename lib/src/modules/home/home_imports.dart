@@ -34,3 +34,5 @@ export 'package:app_ibnt/src/modules/home/view/widgets/loading_reaction_widget.d
 export 'package:app_ibnt/src/modules/home/view/widgets/message_type_widget.dart';
 export 'package:app_ibnt/src/modules/home/blocs/create_event_bloc/create_event_bloc.dart';
 export 'package:image_picker/image_picker.dart';
+export 'package:app_ibnt/src/modules/home/view/pages/events_page.dart';
+export 'package:app_ibnt/src/modules/home/blocs/get_events_bloc/get_events_bloc.dart';

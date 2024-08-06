@@ -16,7 +16,6 @@ final _formKey = GlobalKey<FormState>();
 class _EditMessagePageState extends State<EditMessagePage> {
   @override
   Widget build(BuildContext context) {
-   
     final bibleMessagesBloc = context.read<BibleMessagesBloc>();
 
     final height = MediaQuery.sizeOf(context).height;
@@ -29,7 +28,30 @@ class _EditMessagePageState extends State<EditMessagePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        drawerOptions: [
+          AppDrawerTile(
+            tileName: 'Perfil',
+            leadingIcon: Icons.person_2_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Departamentos',
+            leadingIcon: Icons.file_copy_outlined,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Eventos',
+            leadingIcon: Icons.event,
+            onTap: () {},
+          ),
+          AppDrawerTile(
+            tileName: 'Escalas',
+            leadingIcon: Icons.view_comfortable_outlined,
+            onTap: () {},
+          ),
+        ],
+      ),
       appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
       body: SingleChildScrollView(
         child: SizedBox(

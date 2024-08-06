@@ -17,6 +17,10 @@ class CreateEventException extends HomeException {
   CreateEventException({required super.exception});
 }
 
+class GetEventsException extends HomeException {
+  GetEventsException({required super.exception});
+}
+
 class SetEventImageException extends HomeException {
   SetEventImageException({required super.exception});
 }
@@ -36,6 +40,7 @@ class BibleMessagesReactionsListException extends HomeException {
 class UpdateReactionException extends HomeException {
   UpdateReactionException({required super.exception});
 }
+
 class RemoveReactionException extends HomeException {
   RemoveReactionException({required super.exception});
 }

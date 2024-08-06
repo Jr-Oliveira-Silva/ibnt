@@ -71,6 +71,80 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
+  Future<(HomeException?, EventEntity?)> createEvent(EventEntity event) async {
+    try {
+      final eventMap = event.toMap();
+
+      final eventImage = eventMap.remove("imageField") as XFile;
+
+      final response = await _appClient.post("$API_URL/events", eventMap, headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.created) {
+        final message = response.body.toString();
+        return (CreateEventException(exception: message), null);
+      } else {
+        final createdEvent = EventEntity.fromMap(jsonDecode(response.body));
+        return await setEventImage(eventImage, createdEvent.id!);
+      }
+    } on HomeException catch (e) {
+      if (e is SetEventImageException) {
+        return (e, null);
+      } else {
+        return (CreateEventException(exception: '$e'), null);
+      }
+    } catch (e) {
+      return (CreateEventException(exception: '$e'), null);
+    }
+  }
+
+  @override
+  Future<(HomeException?, List<EventEntity>?)> getEvents() async {
+    try {
+      final response = await _appClient.get("$API_URL/events", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.ok) {
+        final message = response.body.toString();
+        return (GetEventsException(exception: message), <EventEntity>[]);
+      } else {
+        final eventsJsonList = jsonDecode(response.body) as List;
+        final events = eventsJsonList.map((eventMap) => EventEntity.fromMap(eventMap)).toList();
+        return (null, events);
+      }
+    } on HomeException catch (e) {
+      return (GetEventsException(exception: '$e'), null);
+    } catch (e) {
+      return (GetEventsException(exception: '$e'), null);
+    }
+  }
+
+  Future<(HomeException?, EventEntity?)> setEventImage(XFile imageFile, String id) async {
+    try {
+      final response = await _appClient.formDataHandler(
+        imageFile,
+        "imageFile",
+        "$API_URL/events/images/$id",
+        'POST',
+        headers: {"authorization": "Bearer $user_token"},
+      ) as StreamedResponse;
+      if (response.statusCode != HttpStatus.ok) {
+        return (SetEventImageException(exception: "Erro ao definir imagem do evento $id."), null);
+      } else {
+        final body = jsonDecode(await response.stream.bytesToString());
+        final newEvent = EventEntity.fromMap(body);
+        return (null, newEvent);
+      }
+    } catch (e) {
+      throw SetEventImageException(exception: '$e');
+    }
+  }
+
+  @override
   Future<Either<HomeException, List<EventReactionResponse>>> setEventReaction(EventReaction reaction) async {
     try {
       List<EventReactionResponse> eventsReactions = [];
@@ -264,57 +338,6 @@ class HomeRepository implements IHomeRepository {
       }
     } catch (e) {
       return left(RemoveReactionException(exception: "Não foi possível obter lista de reações."));
-    }
-  }
-
-  @override
-  Future<(HomeException?, EventEntity?)> createEvent(EventEntity event) async {
-    try {
-      final eventMap = event.toMap();
-
-      final eventImage = eventMap.remove("imageField") as XFile;
-
-      final response = await _appClient.post("$API_URL/events", eventMap, headers: {
-        "content-type": "application/json",
-        "authorization": "Bearer $user_token",
-      }) as Response;
-
-      if (response.statusCode != HttpStatus.created) {
-        final message = response.body.toString();
-        return (CreateEventException(exception: message), null);
-      } else {
-        final createdEvent = EventEntity.fromMap(jsonDecode(response.body));
-        return await setEventImage(eventImage, createdEvent.id!);
-      }
-    } on HomeException catch (e) {
-      if (e is SetEventImageException) {
-        return (e, null);
-      } else {
-        return (CreateEventException(exception: '$e'), null);
-      }
-    } catch (e) {
-      return (CreateEventException(exception: '$e'), null);
-    }
-  }
-
-  Future<(HomeException?, EventEntity?)> setEventImage(XFile imageFile, String id) async {
-    try {
-      final response = await _appClient.formDataHandler(
-        imageFile,
-        "imageFile",
-        "$API_URL/events/images/$id",
-        'POST',
-        headers: {"authorization": "Bearer $user_token"},
-      ) as StreamedResponse;
-      if (response.statusCode != HttpStatus.ok) {
-        return (SetEventImageException(exception: "Erro ao definir imagem do evento $id."), null);
-      } else {
-        final body = jsonDecode(await response.stream.bytesToString());
-        final newEvent = EventEntity.fromMap(body);
-        return (null, newEvent);
-      }
-    } catch (e) {
-      throw SetEventImageException(exception: '$e');
     }
   }
 }

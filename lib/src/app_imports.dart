@@ -16,6 +16,7 @@ export 'package:app_ibnt/src/modules/departments/departments_imports.dart';
 export 'package:app_ibnt/src/modules/home/home_imports.dart';
 export 'package:app_ibnt/src/modules/posts/posts_imports.dart';
 export 'package:app_ibnt/src/modules/scheduling/scheduling_imports.dart';
+export 'package:app_ibnt/src/mocks/mock_imports.dart';
 //MODULES
 export 'package:app_ibnt/src/modules/splash/splash_imports.dart';
 export 'package:app_ibnt/src/modules/warnings/warnings_imports.dart';

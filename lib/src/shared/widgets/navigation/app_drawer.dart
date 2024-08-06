@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: must_be_immutable
 import 'package:app_ibnt/src/app_imports.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  const AppDrawer({Key? key, required this.drawerOptions}) : super(key: key);
 
+  final List<Widget> drawerOptions;
   @override
   Widget build(BuildContext context) {
     final authBloc = Modular.get<AuthBloc>();
@@ -15,8 +17,6 @@ class AppDrawer extends StatelessWidget {
     final verticalDrawerPdding = height * 0.07;
     final horizontalDrawerPdding = width * 0.035;
     final verticalTilePadding = width * 0.045;
-    final drawerTileFontSize = height * 0.025;
-    final drawerIconSize = height * 0.045;
     return BlocConsumer(
       bloc: authBloc,
       listener: (context, state) {
@@ -44,45 +44,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: verticalTilePadding),
-                    child: ListTile(
-                      onTap: () {},
-                      leading: Icon(Icons.person_2_outlined, size: drawerIconSize),
-                      title: Text(
-                        "Perfil",
-                        style: TextStyle(
-                          fontSize: drawerTileFontSize,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: verticalTilePadding),
-                    child: ListTile(
-                      onTap: () {},
-                      leading: Icon(Icons.file_copy_outlined, size: drawerIconSize),
-                      title: Text(
-                        "Departamentos",
-                        style: TextStyle(
-                          fontSize: drawerTileFontSize,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: verticalTilePadding),
-                    child: ListTile(
-                      onTap: () {},
-                      leading: Icon(Icons.view_comfortable_outlined, size: drawerIconSize),
-                      title: Text(
-                        "Escalas",
-                        style: TextStyle(
-                          fontSize: drawerTileFontSize,
-                        ),
-                      ),
-                    ),
-                  ),
+                  ...drawerOptions,
                   const Spacer(),
                   TextButton(
                     onPressed: () => authBloc.add(SignOutEvent()),

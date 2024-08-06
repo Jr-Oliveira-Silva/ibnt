@@ -15,15 +15,7 @@ void main() {
         },
       );
       final newEvent = EventEntity();
-      final event = EventEntity(
-        id: 'dc32c7cf-5629-4e4e-65e5-08dcaaa89a10',
-        title: 'EVENT TITLE',
-        description: 'EVENT DESCRIPTION',
-        date: '08-08-2024',
-        postDate: '08-08-2024',
-        imageField: XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
-        type: EntityType.event,
-      );
+
       blocTest<CreateEventBloc, CreateEventStates>(
         'emit a CreateEventFailureState',
         setUp: () {
@@ -44,24 +36,16 @@ void main() {
       blocTest<CreateEventBloc, CreateEventStates>(
         'emit a CreateEventSuccessState',
         setUp: () {
-          when(() => repository.createEvent(event)).thenAnswer(
+          when(() => repository.createEvent(HomeMockValues.eventEntity)).thenAnswer(
             (_) async => (
               null,
-              EventEntity(
-                id: 'dc32c7cf-5629-4e4e-65e5-08dcaaa89a10',
-                title: 'EVENT TITLE',
-                description: 'EVENT DESCRIPTION',
-                date: '08-08-2024',
-                postDate: '08-08-2024',
-                imageField: XFile("C:\\Users\\DELL\\Downloads\\IBNT_Screen_1.jpeg"),
-                type: EntityType.event,
-              )
+              HomeMockValues.eventEntity,
             ),
           );
         },
         build: () => bloc,
         act: (bloc) {
-          bloc.add(CreateEventEvent(event));
+          bloc.add(CreateEventEvent(HomeMockValues.eventEntity));
         },
         expect: () => [
           isA<CreateEventLoadingState>(),

@@ -21,3 +21,4 @@ export 'package:app_ibnt/src/shared/widgets/month_title_widget.dart';
 export 'package:app_ibnt/src/shared/widgets/navigation/app_drawer.dart';
 export 'package:app_ibnt/src/shared/widgets/navigation/app_nav_bar_widget.dart';
 export 'package:app_ibnt/src/shared/widgets/date/filled_date_widget.dart';
+export 'package:app_ibnt/src/shared/widgets/tiles/app_drawer_tile.dart';
