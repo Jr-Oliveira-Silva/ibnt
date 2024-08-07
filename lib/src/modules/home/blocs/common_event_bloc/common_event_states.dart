@@ -14,7 +14,11 @@ final class EventLoadingState extends CommonEventStates {}
 final class EventFailureState extends CommonEventStates {
   final String exception;
 
-const  EventFailureState(this.exception);
+  const EventFailureState(this.exception);
 }
+
+final class ShareEventSuccessState extends CommonEventStates {}
+
+final class RemoveFromTimelineSuccessState extends CommonEventStates {}
 
 final class DeleteEventSuccessState extends CommonEventStates {}

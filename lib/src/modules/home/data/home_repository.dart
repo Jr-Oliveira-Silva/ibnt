@@ -77,7 +77,7 @@ class HomeRepository implements IHomeRepository {
 
       final eventImage = eventMap.remove("imageField") as XFile;
 
-      final response = await _appClient.post("$API_URL/events", eventMap, headers: {
+      final response = await _appClient.post("$API_URL/events", body: eventMap, headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -170,7 +170,7 @@ class HomeRepository implements IHomeRepository {
     try {
       List<EventReactionResponse> eventsReactions = [];
 
-      final response = await _appClient.post("$API_URL/reactions/events", reaction.toMap(), headers: {
+      final response = await _appClient.post("$API_URL/reactions/events", body: reaction.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -194,7 +194,7 @@ class HomeRepository implements IHomeRepository {
     try {
       List<BibleMessageReactionResponse> bibleMessagesReactions = [];
 
-      final response = await _appClient.post("$API_URL/reactions/bible-messages", reaction.toMap(), headers: {
+      final response = await _appClient.post("$API_URL/reactions/bible-messages", body: reaction.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -289,7 +289,7 @@ class HomeRepository implements IHomeRepository {
   @override
   Future<Either<HomeException, List<EventReactionResponse>>> updateEventReaction(UpdateReactionEntity reaction) async {
     try {
-      final response = await _appClient.put("$API_URL/reactions/events", reaction.toMap(), headers: {
+      final response = await _appClient.put("$API_URL/reactions/events", body: reaction.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -308,7 +308,7 @@ class HomeRepository implements IHomeRepository {
   @override
   Future<Either<HomeException, List<BibleMessageReactionResponse>>> updateBibleMessageReaction(UpdateReactionEntity reaction) async {
     try {
-      final response = await _appClient.put("$API_URL/reactions/bible-messages", reaction.toMap(), headers: {
+      final response = await _appClient.put("$API_URL/reactions/bible-messages", body: reaction.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -359,6 +359,48 @@ class HomeRepository implements IHomeRepository {
       }
     } catch (e) {
       return left(RemoveReactionException(exception: "Não foi possível obter lista de reações."));
+    }
+  }
+
+  @override
+  Future<(HomeException?, void)> postEventInTimeline(String eventId) async {
+    try {
+      final response = await _appClient.post("$API_URL/timeline/event/$eventId", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.ok) {
+        final message = response.body.toString();
+        return (PostEventInTimelineException(exception: message), null);
+      } else {
+        return (null, null);
+      }
+    } on HomeException catch (e) {
+      return (PostEventInTimelineException(exception: '$e'), null);
+    } catch (e) {
+      return (PostEventInTimelineException(exception: '$e'), null);
+    }
+  }
+
+  @override
+  Future<(HomeException?, void)> removeEventFromTimeline(String eventId) async {
+    try {
+      final response = await _appClient.delete("$API_URL/timeline/event/$eventId", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.ok) {
+        final message = response.body.toString();
+        return (RemoveEventFromTimelineException(exception: message), null);
+      } else {
+        return (null, null);
+      }
+    } on HomeException catch (e) {
+      return (RemoveEventFromTimelineException(exception: '$e'), null);
+    } catch (e) {
+      return (RemoveEventFromTimelineException(exception: '$e'), null);
     }
   }
 }

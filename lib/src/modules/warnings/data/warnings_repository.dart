@@ -7,7 +7,7 @@ class WarningsRepository implements IWarningsRepository {
   @override
   Future<(WarningException?, AnnouncementEntity?)> createAnnouncement(AnnouncementEntity announcement) async {
     try {
-      final response = await _appClient.post("$API_URL/announcements", announcement.creationMap(), headers: {
+      final response = await _appClient.post("$API_URL/announcements", body: announcement.creationMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -30,7 +30,7 @@ class WarningsRepository implements IWarningsRepository {
 
       final mapList = annoucementsList.map((e) => e.creationMap()).toList();
 
-      final response = await _appClient.post("$API_URL/announcements/list", mapList, headers: {
+      final response = await _appClient.post("$API_URL/announcements/list", body: mapList, headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;

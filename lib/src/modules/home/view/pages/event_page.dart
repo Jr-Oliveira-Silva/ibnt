@@ -16,10 +16,8 @@ class _EventPageState extends State<EventPage> {
     final width = MediaQuery.sizeOf(context).width;
     final titleFontSize = height * 0.035;
     final pagePadding = width * 0.035;
-    final dateSection = widget.event.date?.split("T").first;
-    final eventDay = int.parse(dateSection!.split("-").last);
-    final eventMonth = int.parse(dateSection.split("-")[1]);
-    final eventYear = int.parse(dateSection.split("-").first);
+
+    final commonEventBloc = context.read<CommonEventBloc>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -68,26 +66,67 @@ class _EventPageState extends State<EventPage> {
               ),
               SizedBox(height: height * 0.02),
               EventTypeWidget(
-                memberId: "ID",
                 event: widget.event,
-                editable: true,
+                enableSimpleView: true,
               ),
-              FilledDateWidget(
-                  dateModel: DateModel(
-                day: eventDay,
-                month: eventMonth,
-                year: eventYear,
-              )),
-              AppButton(
-                onTap: () {},
-                height: 60,
-                width: width,
-                primaryColor: Colors.white,
-                backgroundColor: AppThemes.primaryColor1,
-                fontSize: 18,
-                text: "Editar",
+              SizedBox(height: height * 0.064),
+              BlocConsumer(
+                bloc: commonEventBloc,
+                listener: (context, state) {
+                  if (state is ShareEventSuccessState) {
+                    Modular.to.navigate("./");
+                  }
+                  if (state is RemoveFromTimelineSuccessState) {
+                    Modular.to.navigate("./");
+                  }
+                },
+                builder: (context, state) {
+                  if (state is EventLoadingState) {
+                    return const Center(child: CircularProgressIndicator.adaptive());
+                  }
+                  if (state is EventFailureState) {
+                    callAppToast(context, state.exception);
+                  }
+                  return Column(
+                    children: [
+                      AppButton(
+                        onTap: () {
+                          callAppDialog(context, "Adicionar à Timeline", "Deseja adicionar o evento ${widget.event.title} à timeline?", () {
+                            commonEventBloc.add(ShareInTimelineEvent(widget.event));
+                            ScaffoldMessenger.of(context).clearMaterialBanners();
+                          }, () {
+                            ScaffoldMessenger.of(context).clearMaterialBanners();
+                          });
+                        },
+                        height: 60,
+                        width: width,
+                        primaryColor: Colors.white,
+                        backgroundColor: AppThemes.primaryColor1,
+                        fontSize: 18,
+                        text: "Compartilhar",
+                      ),
+                      SizedBox(height: height * 0.02),
+                      AppButton(
+                        onTap: () {
+                          callAppDialog(context, "Remover da Timeline", "Deseja remover o evento ${widget.event.title} da timeline?", () {
+                            commonEventBloc.add(RemoveFromTimelineEvent(widget.event));
+                            ScaffoldMessenger.of(context).clearMaterialBanners();
+                          }, () {
+                            ScaffoldMessenger.of(context).clearMaterialBanners();
+                          });
+                        },
+                        height: 60,
+                        width: width,
+                        primaryColor: Colors.white,
+                        backgroundColor: AppThemes.secondaryColor1,
+                        fontSize: 18,
+                        text: "Remover",
+                      ),
+                      SizedBox(height: height * 0.02),
+                    ],
+                  );
+                },
               ),
-              SizedBox(height: height * 0.02),
             ],
           ),
         ),

@@ -7,6 +7,18 @@ sealed class CommonEventEvents extends Equatable {
   List<Object> get props => [];
 }
 
+final class ShareInTimelineEvent extends CommonEventEvents {
+  final EventEntity event;
+
+  const ShareInTimelineEvent(this.event);
+}
+
+final class RemoveFromTimelineEvent extends CommonEventEvents {
+  final EventEntity event;
+
+  const RemoveFromTimelineEvent(this.event);
+}
+
 final class DeleteCommonEventEvent extends CommonEventEvents {
   final EventEntity event;
 

@@ -5,12 +5,14 @@ class MessageEntity extends TimeLineContent {
   final String title;
   final String content;
   final BibleMessageType messageType;
+  final MemberDto? member;
 
   MessageEntity({
     super.id,
     required this.title,
     required this.content,
     required this.messageType,
+    this.member,
     super.type,
   }) {
     super.type = EntityType.message;
@@ -18,10 +20,11 @@ class MessageEntity extends TimeLineContent {
 
   factory MessageEntity.fromMap(Map<String, dynamic> map) {
     return MessageEntity(
-      id:map['id'],
+      id: map['id'],
       title: map['title'],
       content: map['content'],
       messageType: map['type'] == "created" ? BibleMessageType.created : BibleMessageType.generated,
+      member: MemberDto.fromMap(map['member']),
     );
   }
 }

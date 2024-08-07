@@ -121,27 +121,37 @@ class _HomePageState extends State<HomePage> {
                           final timeLine = state.timelineEntity.timeline;
                           return timeLine.isNotEmpty
                               ? Expanded(
-                                  child: ListView.builder(
-                                    itemCount: timeLine.length,
-                                    itemBuilder: (_, i) {
-                                      var timeLineData = timeLine[i];
-                                      if (timeLineData.type == EntityType.event) {
-                                        final event = timeLineData as EventEntity;
-                                        return EventTypeWidget(memberId: _memberId, event: event);
-                                      }
-                                      if (timeLineData.type == EntityType.message) {
-                                        final message = timeLineData as MessageEntity;
-                                        return MessageTypeWidget(
-                                          message: message,
-                                          memberId: _memberId,
-                                          memberName: userBloc.user.fullName ?? "",
-                                        );
-                                      }
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 2.5),
-                                        child: Container(height: height * 0.15, color: AppThemes.secondaryColor1),
-                                      );
+                                  child: RefreshIndicator(
+                                    onRefresh: () async {
+                                      homeBloc.add(FetchTimelineEvent());
                                     },
+                                    child: ListView.builder(
+                                      itemCount: timeLine.length,
+                                      itemBuilder: (_, i) {
+                                        var timeLineData = timeLine[i];
+                                        if (timeLineData.type == EntityType.event) {
+                                          final event = timeLineData as EventEntity;
+                                          return EventTypeWidget(
+                                            event: event,
+                                            reactions: EventReactionsWidget(
+                                              eventReaction: EventReaction(
+                                                eventId: event.id!,
+                                                memberId: _memberId,
+                                                name: "",
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        if (timeLineData.type == EntityType.message) {
+                                          final message = timeLineData as MessageEntity;
+                                          return MessageTypeWidget(message: message);
+                                        }
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 2.5),
+                                          child: Container(height: height * 0.15, color: AppThemes.secondaryColor1),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 )
                               : const Center(

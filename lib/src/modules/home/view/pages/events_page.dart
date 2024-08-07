@@ -61,17 +61,22 @@ class _EventsPageState extends State<EventsPage> {
                       ),
                     ),
                     SizedBox(height: height * 0.02),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: events.length,
-                        itemBuilder: (_, i) {
-                          return EventBanner(
-                            widgetHeight: height * 0.19,
-                            event: events[i],
-                          );
-                        },
-                      ),
-                    )
+                    events.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              itemCount: events.length,
+                              itemBuilder: (_, i) {
+                                return EventBanner(
+                                  widgetHeight: height * 0.19,
+                                  event: events[i],
+                                  onTap: () => Modular.to.pushNamed("./event", arguments: events[i]),
+                                );
+                              },
+                            ),
+                          )
+                        : const Center(
+                            child: TransparentLogoWidget(),
+                          )
                   ],
                 ),
               ),

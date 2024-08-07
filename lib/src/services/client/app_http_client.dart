@@ -15,8 +15,8 @@ class AppHttpClient implements AppClient {
   }
 
   @override
-  Future<Response> post(String url, Object requestBody, {Map<String, String>? headers}) async {
-    final response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: headers);
+  Future post(String url, {Object? body, Map<String, String>? headers}) async {
+    final response = await http.post(Uri.parse(url), body: jsonEncode(body), headers: headers);
     logger(
       url: url,
       method: response.request?.method.toUpperCase() ?? "",
@@ -27,7 +27,7 @@ class AppHttpClient implements AppClient {
   }
 
   @override
-  Future<Response> put(String url, Object body, {Map<String, String>? headers}) async {
+  Future put(String url, {Object? body, Map<String, String>? headers}) async {
     final response = await http.put(Uri.parse(url), body: jsonEncode(body), headers: headers);
     logger(
       url: url,

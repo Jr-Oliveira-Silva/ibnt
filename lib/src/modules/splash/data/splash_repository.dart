@@ -8,7 +8,7 @@ class SplashRepository implements ISplashRepository {
   @override
   Future<Either<AuthException, bool>> verifyToken(String token) async {
     try {
-      final response = await _client.post("$API_URL/auth/verify-token/$token", {}) as Response;
+      final response = await _client.post("$API_URL/auth/verify-token/$token") as Response;
       if (response.statusCode == StatusCodes.OK) {
         return right(true);
       } else {

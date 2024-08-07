@@ -48,3 +48,11 @@ class UpdateReactionException extends HomeException {
 class RemoveReactionException extends HomeException {
   RemoveReactionException({required super.exception});
 }
+
+class PostEventInTimelineException extends HomeException {
+  PostEventInTimelineException({required super.exception});
+}
+
+class RemoveEventFromTimelineException extends HomeException {
+  RemoveEventFromTimelineException({required super.exception});
+}

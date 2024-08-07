@@ -5,13 +5,9 @@ class MessageTypeWidget extends StatelessWidget {
   const MessageTypeWidget({
     Key? key,
     required this.message,
-    required this.memberName,
-    required this.memberId,
   }) : super(key: key);
 
   final MessageEntity message;
-  final String memberName;
-  final String memberId;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +33,20 @@ class MessageTypeWidget extends StatelessWidget {
                   child: Container(
                     height: imageContainerSize,
                     width: imageContainerSize,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
+                      border: message.member?.profileImage != null ? null : Border.all(color: AppThemes.primaryColor1, width: 0.7),
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage("https://images.pexels.com/photos/1309052/pexels-photo-1309052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
-                      ),
+                      image: message.member?.profileImage != null
+                          ? DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(message.member?.profileImage ?? ""),
+                            )
+                          : const DecorationImage(
+                              fit: BoxFit.contain,
+                              image: AssetImage(
+                                "assets/images/ibnt_logo.png",
+                              ),
+                            ),
                     ),
                   ),
                 ),
@@ -56,7 +60,7 @@ class MessageTypeWidget extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(bottom: height * 0.01),
                             child: Text(
-                              memberName,
+                              message.member?.fullName ?? "",
                               style: TextStyle(
                                 fontSize: memberNameFontSize,
                               ),
@@ -89,7 +93,7 @@ class MessageTypeWidget extends StatelessWidget {
             child: BibleMessageReactionsWidget(
               bibleMessageReaction: BibleMessageReaction(
                 name: "",
-                memberId: memberId,
+                memberId: message.member?.id ?? "",
                 bibleMessageId: message.id!,
               ),
             ),

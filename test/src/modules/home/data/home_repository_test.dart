@@ -23,7 +23,7 @@ void main() {
 
           when(() => client.post(
                 "$API_URL/events",
-                eventMap,
+                body: eventMap,
                 headers: {
                   "content-type": "application/json",
                   "authorization": "Bearer $user_token",
@@ -50,7 +50,7 @@ void main() {
 
           when(() => client.post(
                 "$API_URL/events",
-                eventMap,
+                body: eventMap,
                 headers: {
                   "content-type": "application/json",
                   "authorization": "Bearer $user_token",
@@ -219,6 +219,96 @@ void main() {
           expect(exception == null, equals(true));
           expect(eventWithImage, isA<EventEntity>());
           expect(eventWithImage?.id != null, equals(true));
+        },
+      );
+    },
+  );
+
+  group(
+    'PostEventToTimeline should',
+    () {
+      final baseUrl = "$API_URL/timeline/event/${HomeMockValues.eventEntity.id}";
+      test(
+        'fail to share an event to application timeline.',
+        () async {
+          when(() => client.post(
+                baseUrl,
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer(
+            (_) async => Response(jsonEncode("Error message"), HttpStatus.badRequest),
+          );
+
+          final (exception, _) = await repository.postEventInTimeline(HomeMockValues.eventEntity.id!);
+
+          expect(exception != null, equals(true));
+          expect(exception, isA<PostEventInTimelineException>());
+        },
+      );
+
+      test(
+        'share an event in timeline based on its id.',
+        () async {
+          when(() => client.post(
+                baseUrl,
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer(
+            (_) async => Response(jsonEncode("Message"), HttpStatus.ok),
+          );
+
+          final (exception, _) = await repository.postEventInTimeline(HomeMockValues.eventEntity.id!);
+
+          expect(exception == null, equals(true));
+        },
+      );
+    },
+  );
+
+  group(
+    'RemoveEventFromTimeline should',
+    () {
+      final baseUrl = "$API_URL/timeline/event/${HomeMockValues.eventEntity.id}";
+      test(
+        'fail to share an event to application timeline.',
+        () async {
+          when(() => client.delete(
+                baseUrl,
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer(
+            (_) async => Response(jsonEncode("Error message"), HttpStatus.badRequest),
+          );
+
+          final (exception, _) = await repository.removeEventFromTimeline(HomeMockValues.eventEntity.id!);
+
+          expect(exception != null, equals(true));
+          expect(exception, isA<RemoveEventFromTimelineException>());
+        },
+      );
+
+      test(
+        'share an event in timeline based on its id.',
+        () async {
+          when(() => client.delete(
+                baseUrl,
+                headers: {
+                  "content-type": "application/json",
+                  "authorization": "Bearer $user_token",
+                },
+              )).thenAnswer(
+            (_) async => Response(jsonEncode("Message"), HttpStatus.ok),
+          );
+
+          final (exception, _) = await repository.removeEventFromTimeline(HomeMockValues.eventEntity.id!);
+
+          expect(exception == null, equals(true));
         },
       );
     },

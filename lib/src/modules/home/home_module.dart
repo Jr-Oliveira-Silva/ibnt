@@ -44,13 +44,14 @@ class HomeModule extends Module {
     r.child('/event',
         child: (_) => MultiBlocProvider(
               providers: [
+                BlocProvider(create: (context) => Modular.get<CommonEventBloc>()),
                 BlocProvider(create: (context) => Modular.get<DateCubit>()),
               ],
               child: EventPage(event: r.args.data),
             ));
     r.child('/events',
         child: (_) => MultiBlocProvider(
-              providers:  [
+              providers: [
                 BlocProvider(create: (context) => Modular.get<CommonEventBloc>()),
                 BlocProvider(create: (context) => Modular.get<GetEventsBloc>()),
               ],

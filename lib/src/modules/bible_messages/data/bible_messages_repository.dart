@@ -35,7 +35,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
   @override
   Future<Either<BibleMessageException, BibleMessageEntity>> createBibleMessage(NewMessageEntity message) async {
     try {
-      final response = await _appClient.post("$API_URL/biblemessages", message.toMap(), headers: {
+      final response = await _appClient.post("$API_URL/biblemessages", body: message.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -75,7 +75,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
   @override
   Future<Either<BibleMessageException, BibleMessageEntity>> updateBibleMessage(BibleMessageEntity message) async {
     try {
-      final response = await _appClient.put("$API_URL/biblemessages/${message.id}", message.toMap(), headers: {
+      final response = await _appClient.put("$API_URL/biblemessages/${message.id}", body: message.toMap(), headers: {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
@@ -94,7 +94,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
   @override
   Future<(BibleMessageException?, void)> postBibleMessageInTimeline(BibleMessageEntity message) async {
     try {
-      final response = await _appClient.post("$API_URL/timeline/message/${message.id}", {}, headers: {
+      final response = await _appClient.post("$API_URL/timeline/message/${message.id}", headers: {
         "Content-Type": "Application/json",
         "Authorization": "Bearer $user_token",
       }) as Response;

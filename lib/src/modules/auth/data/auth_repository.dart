@@ -17,7 +17,7 @@ class AuthRepository implements IAuthRepository {
       }
       final response = await _appClient.post(
         "$API_URL/members",
-        authMap,
+        body: authMap,
         headers: {"content-type": "application/json"},
       ) as Response;
       if (response.statusCode == StatusCodes.BAD_REQUEST) {
@@ -69,7 +69,7 @@ class AuthRepository implements IAuthRepository {
 
       final apiSignInAttempt = await _appClient.post(
         "$API_URL/auth",
-        userData,
+        body: userData,
         headers: {"content-type": "application/json"},
       ) as Response;
 
@@ -122,7 +122,7 @@ class AuthRepository implements IAuthRepository {
 
       final response = await _appClient.post(
         '$API_URL/auth',
-        userData,
+        body: userData,
         headers: {"content-type": "application/json"},
       ) as Response;
       if (response.statusCode == StatusCodes.OK) {
@@ -152,7 +152,7 @@ class AuthRepository implements IAuthRepository {
       final emailMap = {"email": email};
       final response = await _appClient.post(
         '$API_URL/auth/send-recovery-code',
-        emailMap,
+        body: emailMap,
         headers: {"content-type": "application/json"},
       ) as Response;
       if (response.statusCode == StatusCodes.OK) {
@@ -179,7 +179,7 @@ class AuthRepository implements IAuthRepository {
       final recoveryData = {"email": recoveryEntity.verificationEmail, "password": recoveryEntity.newPassword};
       final response = await _appClient.put(
         '$API_URL/auth/password-definition/${recoveryEntity.verificationCode}',
-        recoveryData,
+        body: recoveryData,
         headers: {"content-type": "application/json"},
       ) as Response;
       if (response.statusCode == StatusCodes.OK) {
@@ -204,7 +204,7 @@ class AuthRepository implements IAuthRepository {
       var prefereces = await SharedPreferences.getInstance();
       final response = await _appClient.post(
         '$BIBLE_API_URL/users',
-        apiUserEntity.toMap(),
+        body: apiUserEntity.toMap(),
         headers: {"content-type": "application/json"},
       ) as Response;
       if (response.statusCode == StatusCodes.OK) {
