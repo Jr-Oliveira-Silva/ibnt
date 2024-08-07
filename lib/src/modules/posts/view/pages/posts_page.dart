@@ -15,30 +15,6 @@ class PostsPageState extends State<PostsPage> {
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: AppDrawer(
-        drawerOptions: [
-          AppDrawerTile(
-            tileName: 'Perfil',
-            leadingIcon: Icons.person_2_outlined,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Departamentos',
-            leadingIcon: Icons.file_copy_outlined,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Eventos',
-            leadingIcon: Icons.event,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Escalas',
-            leadingIcon: Icons.view_comfortable_outlined,
-            onTap: () {},
-          ),
-        ],
-      ),
       appBar: AppBarWidget(preferredSize: Size(width, 80)),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: height * 0.025),

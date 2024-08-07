@@ -81,7 +81,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
+      appBar: AppBarWidget(
+        preferredSize: Size(width, height * 0.08),
+        actions: [
+          IconButton(
+            onPressed: () => Modular.to.pushNamed('./notifications'),
+            icon: const Icon(
+              Icons.notifications_none_outlined,
+            ),
+          ),
+        ],
+      ),
       body: BlocBuilder(
         bloc: userBloc,
         builder: (context, userState) {

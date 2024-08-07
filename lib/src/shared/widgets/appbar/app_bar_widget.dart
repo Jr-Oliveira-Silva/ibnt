@@ -1,7 +1,15 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:app_ibnt/src/app_imports.dart';
 
 class AppBarWidget extends PreferredSize {
-  AppBarWidget({super.key, required super.preferredSize}) : super(child: Container());
+  AppBarWidget({
+    super.key,
+    required super.preferredSize,
+    this.actions,
+  }) : super(child: Container());
+
+  List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +41,7 @@ class AppBarWidget extends PreferredSize {
           ],
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () => Modular.to.pushNamed('/auth/home/notifications'),
-          icon: const Icon(
-            Icons.notifications_none_outlined,
-          ),
-        ),
-      ],
+      actions: actions,
     );
   }
 }
