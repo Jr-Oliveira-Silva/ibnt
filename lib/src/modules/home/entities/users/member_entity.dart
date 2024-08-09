@@ -7,5 +7,6 @@ class MemberEntity extends BaseUserEntity {
     super.profileImage,
     super.departmentAssociation = false,
     super.userCredential,
+    super.role
   });
 }
