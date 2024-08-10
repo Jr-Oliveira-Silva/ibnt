@@ -10,7 +10,7 @@ class HomeModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton<IHomeRepository>(HomeRepository.new);
-    i.addSingleton(UserBloc.new);
+    i.add(UserBloc.new);
     i.add(HomeBloc.new);
     i.add(EventsReactionsBloc.new);
     i.add(BibleMessagesReactionsBloc.new);
@@ -25,10 +25,10 @@ class HomeModule extends Module {
     r.child(
       '/',
       child: (_) => MultiBlocProvider(providers: [
-        BlocProvider(create: (context) => Modular.get<UserBloc>()),
-        BlocProvider(create: (context) => Modular.get<HomeBloc>()),
-        BlocProvider(create: (context) => Modular.get<EventsReactionsBloc>()),
-        BlocProvider(create: (context) => Modular.get<BibleMessagesReactionsBloc>()),
+        BlocProvider.value(value: Modular.get<UserBloc>()),
+        BlocProvider.value(value: Modular.get<HomeBloc>()),
+        BlocProvider.value(value: Modular.get<EventsReactionsBloc>()),
+        BlocProvider.value(value: Modular.get<BibleMessagesReactionsBloc>()),
       ], child: HomePage()),
     );
     r.child(
@@ -62,11 +62,10 @@ class HomeModule extends Module {
       child: (_) => const NotificationsPage(),
       transition: TransitionType.rightToLeft,
     );
-    r.child('/profile',
+    r.child('/profile/:memberId',
         child: (_) => MultiBlocProvider(
               providers: [
-                BlocProvider(create: (context) => Modular.get<UserBloc>()),
-                BlocProvider(create: (context) => Modular.get<GetDepartmentsBloc>()),
+                BlocProvider(create: (_) => Modular.get<UserBloc>()),
               ],
               child: const ProfilePage(),
             ));

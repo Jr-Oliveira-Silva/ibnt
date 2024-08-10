@@ -27,6 +27,29 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
+  Future<(HomeException?, BaseUserEntity?)> setUserImage(XFile imageFile, String id) async {
+    try {
+      final response = await _appClient.formDataHandler(
+        imageFile,
+        "imageFile",
+        "$API_URL/members/images/$id",
+        'POST',
+        headers: {"authorization": "Bearer $user_token"},
+      ) as StreamedResponse;
+      if (response.statusCode != HttpStatus.ok) {
+        return (SetEventImageException(exception: "Erro ao definir imagem do usuário $id."), null);
+      } else {
+        final body = jsonDecode(await response.stream.bytesToString());
+        final user = MemberDto.fromMap(body);
+        final result = await getMemberById(user.id!);
+        return (null, result.fold((l) => null, (r) => r));
+      }
+    } catch (e) {
+      throw SetEventImageException(exception: '$e');
+    }
+  }
+
+  @override
   Future<Either<HomeException, TimeLineEntity>> fetchTimeline() async {
     try {
       final timelineEntity = TimeLineEntity(title: "", timeline: []);
@@ -215,11 +238,14 @@ class HomeRepository implements IHomeRepository {
 
   BaseUserEntity userTypeDefinition(Map<String, dynamic> userMap) {
     String type = userMap["credential"]["role"];
+    final list = userMap["departments"] as List;
+    List<DepartmentEntity> departments = list.map((department) => DepartmentEntity.fromMap(department)).toList();
     return type == "user"
         ? MemberEntity(
             id: userMap["id"],
             fullName: userMap["fullName"],
             profileImage: userMap["profileImage"],
+            departments: departments,
             userCredential: AppUserCredential(
               email: userMap["credential"]["email"],
               role: UserRole.user,
@@ -228,6 +254,7 @@ class HomeRepository implements IHomeRepository {
             id: userMap["id"],
             fullName: userMap["fullName"],
             profileImage: userMap["profileImage"],
+            departments: departments,
             userCredential: AppUserCredential(
               email: userMap["credential"]["email"],
               role: UserRole.admin,

@@ -43,7 +43,9 @@ class _HomePageState extends State<HomePage> {
       if (!userBloc.isClosed) {
         userBloc.add(GetMemberByIdEvent(_memberId));
       }
-      homeBloc.add(FetchTimelineEvent());
+      if (!homeBloc.isClosed) {
+        homeBloc.add(FetchTimelineEvent());
+      }
     });
   }
 
@@ -60,7 +62,10 @@ class _HomePageState extends State<HomePage> {
           AppDrawerTile(
             tileName: 'Perfil',
             leadingIcon: Icons.person_2_outlined,
-            onTap: () {},
+            onTap: () {
+              Modular.to.pushNamed('./profile/$_memberId');
+              Navigator.of(context).pop();
+            },
           ),
           AppDrawerTile(
             tileName: 'Departamentos',

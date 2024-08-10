@@ -1,14 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class MemberDto {
-  final String id;
-  final String fullName;
-  final String profileImage;
+import 'package:app_ibnt/src/app_imports.dart';
 
+class MemberDto extends BaseUserEntity{
   MemberDto({
-    required this.id,
-    required this.fullName,
-    required this.profileImage,
+    required super.id,
+    required super.fullName,
+    required super.profileImage,
   });
 
   factory MemberDto.fromMap(Map<String, dynamic> map) {

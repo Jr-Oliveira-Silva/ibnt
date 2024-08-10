@@ -2,6 +2,7 @@ import 'package:app_ibnt/src/modules/home/home_imports.dart';
 
 abstract class IHomeRepository {
   Future<Either<HomeException, BaseUserEntity>> getMemberById(String memberId);
+  Future<(HomeException?, BaseUserEntity?)> setUserImage(XFile imageFile, String id);
   Future<Either<HomeException, TimeLineEntity>> fetchTimeline();
   Future<(HomeException?, EventEntity?)> createEvent(EventEntity event);
   Future<(HomeException?, List<EventEntity>?)> getEvents();

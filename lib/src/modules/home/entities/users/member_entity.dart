@@ -5,7 +5,7 @@ class MemberEntity extends BaseUserEntity {
     super.id,
     super.fullName,
     super.profileImage,
-    super.departmentAssociation = false,
+    super.departments,
     super.userCredential,
     super.role
   });

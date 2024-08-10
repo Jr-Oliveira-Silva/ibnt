@@ -6,7 +6,7 @@ abstract class BaseUserEntity {
   String? email;
   String? fullName;
   String? profileImage;
-  bool? departmentAssociation;
+  List<DepartmentEntity>? departments;
   AppUserCredential? userCredential;
   Credential? credential;
   UserRole? role;
@@ -16,9 +16,13 @@ abstract class BaseUserEntity {
     this.email,
     this.fullName,
     this.profileImage,
-    this.departmentAssociation = false,
+    this.departments,
     this.userCredential,
     this.credential,
     this.role,
   });
+
+  String imageUrl() {
+    return "$API_IMAGE_URL$profileImage";
+  }
 }

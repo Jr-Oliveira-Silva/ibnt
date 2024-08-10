@@ -5,6 +5,7 @@ class AdminEntity extends BaseUserEntity {
     super.id,
     super.fullName,
     super.userCredential,
+    super.departments,
     super.role,
     super.profileImage,
   });

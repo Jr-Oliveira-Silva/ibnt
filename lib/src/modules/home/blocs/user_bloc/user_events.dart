@@ -11,3 +11,9 @@ final class GetMemberByIdEvent extends UserEvents {
   GetMemberByIdEvent(this.memberId);
 }
 
+final class SetMemberProfileImageEvent extends UserEvents {
+  final XFile imageFile;
+  final String memberId;
+
+  SetMemberProfileImageEvent(this.imageFile, this.memberId);
+}
