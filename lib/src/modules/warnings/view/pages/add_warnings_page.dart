@@ -121,7 +121,6 @@ class _AddWarningsPageState extends State<AddWarningsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: 3),
     );
   }
 }

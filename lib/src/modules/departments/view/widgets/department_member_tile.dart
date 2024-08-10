@@ -36,9 +36,9 @@ class DepartmentMemberTile extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: member.profileImage != null
                       ? DecorationImage(
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           image: NetworkImage(
-                            member.profileImage ?? "",
+                            member.imageUrl(),
                           ))
                       : const DecorationImage(
                           image: AssetImage(

@@ -52,9 +52,9 @@ class BibleMessageWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                         image: createdMessage && user.profileImage != null
                             ? DecorationImage(
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 image: NetworkImage(
-                                  user.profileImage ?? "",
+                                  user.imageUrl(),
                                 ))
                             : const DecorationImage(
                                 image: AssetImage(
@@ -82,7 +82,7 @@ class BibleMessageWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      user.fullName ?? "Usuário",
+                      message.messageType == BibleMessageType.created ? user.fullName ?? "" : "Mensagem Automática",
                       style: TextStyle(
                         fontSize: memberNameFontSize,
                       ),

@@ -43,9 +43,9 @@ class _AppNavBarWidgetState extends State<AppNavBarWidget> {
       items: const [
         BottomNavigationBarItem(
           backgroundColor: Colors.white,
-          label: "Postagens",
+          label: "Perfil",
           icon: Icon(
-            Icons.add_circle,
+            Icons.person_rounded,
           ),
         ),
         BottomNavigationBarItem(
@@ -79,7 +79,7 @@ class _AppNavBarWidgetState extends State<AppNavBarWidget> {
     });
     switch (value) {
       case 0:
-        Modular.to.navigate('/auth/home/posts/');
+        Modular.to.pushNamed('/auth/home/profile/$_memberId');
         break;
       case 1:
         Modular.to.navigate('/auth/home/');

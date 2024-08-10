@@ -22,16 +22,31 @@ abstract class DepartmentMockValues {
         'id': '8132498asdfahsiouh453i2uoqa',
         'fullName': 'User name',
         'profileImage': 'imageUrl',
+        'credential': {
+          "email": "jr@gmail.com",
+          "role": "admin",
+          "token": "",
+        }
       },
       {
         'id': '8132498asdfahsiouh453i2uoqa',
         'fullName': 'User name',
         'profileImage': 'imageUrl',
+        'credential': {
+          "email": "jr@gmail.com",
+          "role": "admin",
+          "token": "",
+        }
       },
       {
         'id': '8132498asdfahsiouh453i2uoqa',
         'fullName': 'User name',
         'profileImage': 'imageUrl',
+        'credential': {
+          "email": "jr@gmail.com",
+          "role": "admin",
+          "token": "",
+        }
       },
     ],
   });
@@ -45,58 +60,31 @@ abstract class DepartmentMockValues {
           'id': '8132498asdfahsiouh453i2uoqa',
           'fullName': 'User name',
           'profileImage': 'imageUrl',
+          'credential': {
+            "email": "jr@gmail.com",
+            "role": "admin",
+            "token": "",
+          }
         },
         {
           'id': '8132498asdfahsiouh453i2uoqa',
           'fullName': 'User name',
           'profileImage': 'imageUrl',
+          'credential': {
+            "email": "jr@gmail.com",
+            "role": "admin",
+            "token": "",
+          }
         },
         {
           'id': '8132498asdfahsiouh453i2uoqa',
           'fullName': 'User name',
           'profileImage': 'imageUrl',
-        },
-      ],
-    },
-    {
-      'id': "89as8fg23ajsdfhkasjdhf94823",
-      'title': "TITLE",
-      'members': [
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
-        },
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
-        },
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
-        },
-      ],
-    },
-    {
-      'id': "89as8fg23ajsdfhkasjdhf94823",
-      'title': "TITLE",
-      'members': [
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
-        },
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
-        },
-        {
-          'id': '8132498asdfahsiouh453i2uoqa',
-          'fullName': 'User name',
-          'profileImage': 'imageUrl',
+          'credential': {
+            "email": "jr@gmail.com",
+            "role": "admin",
+            "token": "",
+          }
         },
       ],
     }

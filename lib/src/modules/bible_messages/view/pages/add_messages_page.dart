@@ -74,7 +74,6 @@ class _AddMessagesPageState extends State<AddMessagesPage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: 2),
     );
   }
 }

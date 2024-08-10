@@ -20,7 +20,7 @@ class BibleMessagesModule extends Module {
     r.child(
       '/:memberId',
       child: (_) => MultiBlocProvider(providers: [
-        BlocProvider(create: (context) => Modular.get<UserBloc>()),
+        BlocProvider.value(value: Modular.get<UserBloc>()),
         BlocProvider(create: (context) => Modular.get<GetMemberMessagesBloc>()),
         BlocProvider(create: (context) => Modular.get<BibleMessagesFilterCubit>()),
       ], child: const MessagesPage()),

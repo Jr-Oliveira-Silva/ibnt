@@ -124,7 +124,6 @@ class _CreateMessagePageState extends State<CreateMessagePage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );
   }
 }

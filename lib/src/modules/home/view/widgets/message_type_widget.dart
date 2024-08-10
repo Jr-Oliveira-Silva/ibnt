@@ -36,10 +36,10 @@ class MessageTypeWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: message.member?.profileImage != null ? null : Border.all(color: AppThemes.primaryColor1, width: 0.7),
                       shape: BoxShape.circle,
-                      image: message.member?.profileImage != null
+                      image: message.member!.profileImage != null
                           ? DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(message.member?.profileImage ?? ""),
+                              image: NetworkImage(message.member!.imageUrl()),
                             )
                           : const DecorationImage(
                               fit: BoxFit.contain,

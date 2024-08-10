@@ -23,6 +23,10 @@ abstract class BaseUserEntity {
   });
 
   String imageUrl() {
-    return "$API_IMAGE_URL$profileImage";
+    if (profileImage!.contains("Images/Users")) {
+      return "$API_IMAGE_URL$profileImage";
+    } else {
+      return profileImage!;
+    }
   }
 }

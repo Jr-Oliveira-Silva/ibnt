@@ -126,7 +126,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: 1),
     );
   }
 }

@@ -10,6 +10,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final _pageIndex = 0;
   late UserBloc userBloc;
   @override
   void initState() {
@@ -122,15 +123,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                     SizedBox(height: height * 0.04),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Departamentos",
-                        style: TextStyle(
-                          fontSize: subtitleFontSize,
-                        ),
-                      ),
-                    ),
+                    user.departments!.isNotEmpty
+                        ? Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Departamentos",
+                              style: TextStyle(
+                                fontSize: subtitleFontSize,
+                              ),
+                            ),
+                          )
+                        : Container(),
                     user.departments!.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
@@ -169,6 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );
   }
 }

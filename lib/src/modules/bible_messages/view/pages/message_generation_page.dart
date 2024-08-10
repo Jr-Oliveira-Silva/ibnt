@@ -119,7 +119,6 @@ class _MessageGenerationPageState extends State<MessageGenerationPage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );
   }
 }

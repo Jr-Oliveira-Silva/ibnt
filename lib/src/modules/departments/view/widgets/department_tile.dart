@@ -23,7 +23,7 @@ class _DepartmentTileState extends State<DepartmentTile> {
     const tileInternalPadding = 8.0;
     const departmentTitleFontSize = 20.0;
     const departmentInfoFontSize = 16.0;
-    return InkWell(
+    return GestureDetector(
       onTap: widget.onTap,
       child: Padding(
         padding: const EdgeInsets.only(top: tileTopPadding),

@@ -27,18 +27,20 @@ Future<void> _setUserData() async {
 PageController controller = PageController(initialPage: _initialPage);
 
 class _MessageMenuWidgetState extends State<MessageMenuWidget> {
+  late UserBloc userBloc;
   @override
   void initState() {
     super.initState();
-    _currentIndex = _initialPage;
+    userBloc = context.read<UserBloc>();
     _setUserData().then((value) {
+      userBloc.add(GetMemberByIdEvent(_memberId));
+      _currentIndex = _initialPage;
       widget.getMemberMessagesBloc.add(GetMemberMessagesEvent(_memberId));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = context.read<UserBloc>();
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final buttonFontSize = height * 0.025;
