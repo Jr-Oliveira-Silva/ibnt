@@ -14,11 +14,11 @@ final class GetDepartmentsLoadingState extends GetDepartmentsStates {}
 final class GetDepartmentsFailureState extends GetDepartmentsStates {
   final String message;
 
-  GetDepartmentsFailureState(this.message);
+  const GetDepartmentsFailureState(this.message);
 }
 
 final class GetDepartmentsSuccessState extends GetDepartmentsStates {
   final List<DepartmentEntity> departments;
 
-  GetDepartmentsSuccessState(this.departments);
+  const GetDepartmentsSuccessState(this.departments);
 }

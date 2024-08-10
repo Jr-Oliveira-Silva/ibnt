@@ -1,6 +1,4 @@
 import 'package:app_ibnt/src/app_imports.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
 part 'get_departments_eventa.dart';
 part 'get_departments_states.dart';

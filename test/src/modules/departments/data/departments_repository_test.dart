@@ -134,4 +134,41 @@ void main() {
       },
     );
   });
+
+  group('RemoveMemberFromDepartment should', () {
+    test(
+      'return a RemoveMemberException as failure result.',
+      () async {
+        when(() => client.delete(
+              "$API_URL/departments/members/89as8fg23ajsdfhkasjdhf94823/aksj3k4j52ljhalkh98ASDF234kj",
+              headers: {
+                "content-type": "application/json",
+                "authorization": "Bearer $user_token",
+              },
+            )).thenAnswer((_) async => Response("SERVER error message.", 400));
+
+        final (exception, _) = await repository.removeMemberFromDepartment(DepartmentMockValues.department, DepartmentMockValues.member);
+
+        expect(exception != null, equals(true));
+        expect(exception, isA<RemoveMemberException>());
+        expect(exception?.exception, equals("SERVER error message."));
+      },
+    );
+    test(
+      'return null value for exception.',
+      () async {
+        when(() => client.delete(
+              "$API_URL/departments/members/89as8fg23ajsdfhkasjdhf94823/aksj3k4j52ljhalkh98ASDF234kj",
+              headers: {
+                "content-type": "application/json",
+                "authorization": "Bearer $user_token",
+              },
+            )).thenAnswer((_) async => Response("SERVER error message.", 200));
+
+        final (exception, _) = await repository.removeMemberFromDepartment(DepartmentMockValues.department, DepartmentMockValues.member);
+
+        expect(exception == null, equals(true));
+      },
+    );
+  });
 }

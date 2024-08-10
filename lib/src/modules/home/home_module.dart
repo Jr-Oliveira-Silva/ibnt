@@ -62,10 +62,14 @@ class HomeModule extends Module {
       child: (_) => const NotificationsPage(),
       transition: TransitionType.rightToLeft,
     );
-    r.child(
-      '/profile',
-      child: (_) => const ProfilePage(),
-    );
+    r.child('/profile',
+        child: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => Modular.get<UserBloc>()),
+                BlocProvider(create: (context) => Modular.get<GetDepartmentsBloc>()),
+              ],
+              child: const ProfilePage(),
+            ));
     r.module('/bible_messages', module: BibleMessagesModule(), transition: TransitionType.fadeIn);
     r.module('/warnings', module: WarningsModule(), transition: TransitionType.fadeIn);
     r.module('/posts', module: PostsModule(), transition: TransitionType.fadeIn);

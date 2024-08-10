@@ -14,7 +14,7 @@ final class RemoveDepartmentLoadingState extends RemoveDepartmentStates {}
 final class RemoveDepartmentFailureState extends RemoveDepartmentStates {
   final String message;
 
-  RemoveDepartmentFailureState(this.message);
+  const RemoveDepartmentFailureState(this.message);
 }
 
 final class RemoveDepartmentSuccessState extends RemoveDepartmentStates {}

@@ -1,17 +1,46 @@
 import 'package:app_ibnt/src/modules/departments/departments_imports.dart';
-import 'package:app_ibnt/src/modules/departments/view/pages/add_departments_page.dart';
-import 'package:app_ibnt/src/modules/departments/view/pages/department_page.dart';
-import 'package:app_ibnt/src/modules/departments/view/pages/departments_page.dart';
 
 class DepartmentsModule extends Module {
   @override
   List<Module> get imports => [
         HomeModule(),
       ];
+
+  @override
+  void binds(Injector i) {
+    i.addSingleton<IDepartmentsRepository>(DepartmentsRepository.new);
+    i.addLazySingleton(CreateDepartmentBloc.new);
+    i.add(GetDepartmentsBloc.new);
+    i.addLazySingleton(RemoveDepartmentBloc.new);
+    i.addLazySingleton(RemoveMemberFromDepartmentBloc.new);
+    i.add(DepartmentMembersCubit.new);
+  }
+
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (_) => const DepartmentsPage());
-    r.child('/', child: (_) => const AddDepartmentsPage());
-    r.child('/', child: (_) => const DepartmentPage());
+    r.child('/',
+        child: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => Modular.get<GetDepartmentsBloc>()),
+                BlocProvider.value(value: Modular.get<RemoveDepartmentBloc>()),
+                BlocProvider.value(value: Modular.get<RemoveMemberFromDepartmentBloc>()),
+              ],
+              child: const DepartmentsPage(),
+            ));
+    r.child('/add_department',
+        child: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => Modular.get<CreateDepartmentBloc>()),
+              ],
+              child: const AddDepartmentPage(),
+            ));
+    r.child('/department',
+        child: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: Modular.get<RemoveMemberFromDepartmentBloc>()),
+                BlocProvider(create: (_) => Modular.get<DepartmentMembersCubit>()),
+              ],
+              child: DepartmentPage(department: r.args.data),
+            ));
   }
 }

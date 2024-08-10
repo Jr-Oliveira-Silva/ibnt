@@ -7,6 +7,13 @@ abstract class DepartmentMockValues {
     members: [],
   );
 
+  static final member = DepartmentMember(
+    id: "aksj3k4j52ljhalkh98ASDF234kj",
+    fullName: "NAME",
+    email: "EMAIL",
+    profileImage: "profileImage",
+  );
+
   static final departmentJson = jsonEncode({
     'id': "89as8fg23ajsdfhkasjdhf94823",
     'title': "TITLE",

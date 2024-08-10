@@ -14,6 +14,10 @@ final class GetDepartmentsException extends DepartmentException {
   GetDepartmentsException({required super.exception});
 }
 
+final class RemoveMemberException extends DepartmentException {
+  RemoveMemberException({required super.exception});
+}
+
 final class RemoveDepartmentException extends DepartmentException {
   RemoveDepartmentException({required super.exception});
 }

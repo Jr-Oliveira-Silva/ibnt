@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _pageIndex = 1;
   late String _memberId;
 
   Future<void> _setUserData() async {
@@ -22,11 +23,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  late UserBloc userBloc;
+  late HomeBloc homeBloc;
+  late EventsReactionsBloc eventsReactionsBloc;
+  late BibleMessagesReactionsBloc bibleMessagesReactionsBloc;
+
   @override
   void initState() {
     super.initState();
-    final userBloc = context.read<UserBloc>();
-    final homeBloc = context.read<HomeBloc>();
+    userBloc = context.read<UserBloc>();
+    homeBloc = context.read<HomeBloc>();
+    eventsReactionsBloc = context.read<EventsReactionsBloc>();
+    bibleMessagesReactionsBloc = context.read<BibleMessagesReactionsBloc>();
+    eventsReactionsBloc.add(FetchEventsReactionsEvent());
+    bibleMessagesReactionsBloc.add(FetchBibleMessagesReactionsEvent());
 
     Future.delayed(const Duration(milliseconds: 200)).whenComplete(() async {
       await _setUserData();
@@ -43,15 +53,6 @@ class _HomePageState extends State<HomePage> {
     final width = MediaQuery.sizeOf(context).width;
     final titleFontSize = height * 0.035;
     final pagePadding = width * 0.035;
-
-    final userBloc = context.read<UserBloc>();
-    final homeBloc = context.read<HomeBloc>();
-    final eventsReactionsBloc = context.read<EventsReactionsBloc>();
-    final bibleMessagesReactionsBloc = context.read<BibleMessagesReactionsBloc>();
-
-    eventsReactionsBloc.add(FetchEventsReactionsEvent());
-    bibleMessagesReactionsBloc.add(FetchBibleMessagesReactionsEvent());
-
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: AppDrawer(
@@ -64,7 +65,10 @@ class _HomePageState extends State<HomePage> {
           AppDrawerTile(
             tileName: 'Departamentos',
             leadingIcon: Icons.file_copy_outlined,
-            onTap: () {},
+            onTap: () {
+              Modular.to.pushNamed('./departments');
+              Navigator.of(context).pop();
+            },
           ),
           AppDrawerTile(
             tileName: 'Eventos',
@@ -134,6 +138,8 @@ class _HomePageState extends State<HomePage> {
                                   child: RefreshIndicator(
                                     onRefresh: () async {
                                       homeBloc.add(FetchTimelineEvent());
+                                      eventsReactionsBloc.add(FetchEventsReactionsEvent());
+                                      bibleMessagesReactionsBloc.add(FetchBibleMessagesReactionsEvent());
                                     },
                                     child: ListView.builder(
                                       itemCount: timeLine.length,
@@ -191,7 +197,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: 1),
+      bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );
   }
 }

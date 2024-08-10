@@ -48,7 +48,7 @@ class BibleMessageWidget extends StatelessWidget {
                       height: imageContainerSize,
                       width: imageContainerSize,
                       decoration: BoxDecoration(
-                        border: !createdMessage || user.profileImage == null ? Border.all(color: AppThemes.primaryColor1, width: 2) : null,
+                        border: !createdMessage || user.profileImage == null ? Border.all(color: AppThemes.primaryColor1, width: 1) : null,
                         shape: BoxShape.circle,
                         image: createdMessage && user.profileImage != null
                             ? DecorationImage(

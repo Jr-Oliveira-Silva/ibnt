@@ -51,6 +51,27 @@ class DepartmentsRepository implements IDepartmentsRepository {
   }
 
   @override
+  Future<(DepartmentException?, void)> removeMemberFromDepartment(DepartmentEntity department, DepartmentMember member) async {
+    try {
+      final response = await _appClient.delete("$API_URL/departments/members/${department.id}/${member.id}", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.ok) {
+        final message = response.body.toString();
+        return (RemoveMemberException(exception: message), null);
+      } else {
+        return (null, null);
+      }
+    } on DepartmentException catch (e) {
+      return (RemoveMemberException(exception: '$e'), null);
+    } catch (e) {
+      return (RemoveMemberException(exception: '$e'), null);
+    }
+  }
+
+  @override
   Future<(DepartmentException?, void)> removeDepartment(DepartmentEntity department) async {
     try {
       final response = await _appClient.delete("$API_URL/departments/${department.id}", headers: {

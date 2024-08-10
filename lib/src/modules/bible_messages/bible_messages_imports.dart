@@ -21,3 +21,4 @@ export 'package:app_ibnt/src/modules/bible_messages/view/pages/message_generatio
 export 'package:app_ibnt/src/modules/bible_messages/view/pages/message_page.dart';
 export 'package:app_ibnt/src/modules/bible_messages/view/pages/messages_page.dart';
 export 'package:app_ibnt/src/modules/bible_messages/view/widgets/bible_message_widget.dart';
+export 'package:app_ibnt/src/modules/bible_messages/view/pages/edit_message_page.dart';

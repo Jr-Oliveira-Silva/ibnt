@@ -1,5 +1,4 @@
 import 'package:app_ibnt/src/modules/bible_messages/bible_messages_imports.dart';
-import 'package:app_ibnt/src/modules/bible_messages/view/pages/edit_message_page.dart';
 
 class BibleMessagesModule extends Module {
   @override
