@@ -15,7 +15,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final getMemberMessagesBloc = context.read<GetMemberMessagesBloc>();
+    // final getMemberMessagesBloc = context.read<GetMemberMessagesBloc>();
 
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
@@ -41,7 +41,7 @@ class _MessagesPageState extends State<MessagesPage> {
                 ),
               ),
               SizedBox(height: height * 0.02),
-              MessageMenuWidget(getMemberMessagesBloc: getMemberMessagesBloc),
+              MessageMenuWidget(memberId: memberId,),
             ],
           ),
         ),

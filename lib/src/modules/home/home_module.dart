@@ -10,14 +10,14 @@ class HomeModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton<IHomeRepository>(HomeRepository.new);
-    i.add(UserBloc.new);
-    i.add(HomeBloc.new);
-    i.add(EventsReactionsBloc.new);
-    i.add(BibleMessagesReactionsBloc.new);
-    i.add(CreateEventBloc.new);
-    i.add(CommonEventBloc.new);
-    i.add(GetEventsBloc.new);
-    i.add(DateCubit.new);
+    i.add<UserBloc>(UserBloc.new);
+    i.add<HomeBloc>(HomeBloc.new);
+    i.add<EventsReactionsBloc>(EventsReactionsBloc.new);
+    i.add<BibleMessagesReactionsBloc>(BibleMessagesReactionsBloc.new);
+    i.add<CreateEventBloc>(CreateEventBloc.new);
+    i.add<CommonEventBloc>(CommonEventBloc.new);
+    i.add<GetEventsBloc>(GetEventsBloc.new);
+    i.add<DateCubit>(DateCubit.new);
   }
 
   @override
@@ -30,6 +30,16 @@ class HomeModule extends Module {
         BlocProvider.value(value: Modular.get<EventsReactionsBloc>()),
         BlocProvider.value(value: Modular.get<BibleMessagesReactionsBloc>()),
       ], child: HomePage()),
+      guards: [userGuard],
+    );
+    r.child(
+      '/home_user',
+      child: (_) => MultiBlocProvider(providers: [
+        BlocProvider.value(value: Modular.get<UserBloc>()),
+        BlocProvider.value(value: Modular.get<HomeBloc>()),
+        BlocProvider.value(value: Modular.get<EventsReactionsBloc>()),
+        BlocProvider.value(value: Modular.get<BibleMessagesReactionsBloc>()),
+      ], child: HomePageUser()),
     );
     r.child(
       '/add_events/:memberId',
@@ -65,6 +75,7 @@ class HomeModule extends Module {
     r.child('/profile/:memberId',
         child: (_) => MultiBlocProvider(
               providers: [
+                BlocProvider(create: (_) => Modular.get<AuthBloc>()),
                 BlocProvider(create: (_) => Modular.get<UserBloc>()),
               ],
               child: const ProfilePage(),
@@ -75,4 +86,6 @@ class HomeModule extends Module {
     r.module('/departments', module: DepartmentsModule(), transition: TransitionType.fadeIn);
     r.module('/scheduling', module: SchedulingModule(), transition: TransitionType.fadeIn);
   }
+
+  final userGuard = UserGuard(redirectTo: './home_user');
 }

@@ -1,16 +1,16 @@
 // ignore_for_file: must_be_immutable
 import 'package:app_ibnt/src/modules/home/home_imports.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class HomePageUser extends StatefulWidget {
+  HomePageUser({super.key});
 
   late BaseUserEntity user;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageUser> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePageUser> {
   final _pageIndex = 1;
   late String _memberId;
 
@@ -57,31 +57,6 @@ class _HomePageState extends State<HomePage> {
     final pagePadding = width * 0.035;
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: AppDrawer(
-        drawerOptions: [
-          AppDrawerTile(
-            tileName: 'Departamentos',
-            leadingIcon: Icons.file_copy_outlined,
-            onTap: () {
-              Modular.to.pushNamed('./departments/');
-              Navigator.of(context).pop();
-            },
-          ),
-          AppDrawerTile(
-            tileName: 'Eventos',
-            leadingIcon: Icons.event,
-            onTap: () {
-              Modular.to.pushNamed('./events');
-              Navigator.of(context).pop();
-            },
-          ),
-          AppDrawerTile(
-            tileName: 'Escalas',
-            leadingIcon: Icons.view_comfortable_outlined,
-            onTap: () {},
-          ),
-        ],
-      ),
       appBar: AppBarWidget(
         preferredSize: Size(width, height * 0.08),
         actions: [
@@ -191,18 +166,6 @@ class _HomePageState extends State<HomePage> {
           }
           return Container();
         },
-      ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: height * 0.025),
-        child: FloatingActionButton(
-          onPressed: () => Modular.to.pushNamed('./add_events'),
-          backgroundColor: AppThemes.primaryColor1,
-          child: const Icon(
-            Icons.add,
-            size: 35,
-            color: Colors.white,
-          ),
-        ),
       ),
       bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );

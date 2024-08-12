@@ -21,6 +21,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = Modular.get<AuthBloc>();
+
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final titleFontSize = height * 0.035;
@@ -35,11 +37,35 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBarWidget(
         preferredSize: Size(width, height * 0.08),
         actions: [
-          IconButton(
-            onPressed: () => Modular.to.pushNamed('./notifications'),
-            icon: const Icon(
-              Icons.notifications_none_outlined,
-            ),
+          BlocConsumer(
+            bloc: authBloc,
+            listener: (context, state) async {
+              if (state is AuthSignOutState) {
+                await Future.delayed(const Duration(seconds: 1));
+                Modular.to.navigate('/');
+              }
+            },
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  callAppDialog(
+                    context,
+                    "Sair do App",
+                    "Deseja sair do app IBNT?",
+                    () {
+                      authBloc.add(SignOutEvent());
+                      ScaffoldMessenger.of(context).clearMaterialBanners();
+                    },
+                    () {
+                      ScaffoldMessenger.of(context).clearMaterialBanners();
+                    },
+                  );
+                },
+                icon: const Icon(
+                  Icons.keyboard_arrow_right_sharp,
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:app_ibnt/src/modules/home/home_imports.dart';
 class MessageEntity extends TimeLineContent {
   final String title;
   final String content;
+  String? baseText;
   final BibleMessageType messageType;
   final MemberDto? member;
 
@@ -12,6 +13,7 @@ class MessageEntity extends TimeLineContent {
     required this.title,
     required this.content,
     required this.messageType,
+    this.baseText,
     this.member,
     super.type,
   }) {
@@ -23,6 +25,7 @@ class MessageEntity extends TimeLineContent {
       id: map['id'],
       title: map['title'],
       content: map['content'],
+      baseText: map['baseText'] ?? "",
       messageType: map['type'] == "created" ? BibleMessageType.created : BibleMessageType.generated,
       member: MemberDto.fromMap(map['member']),
     );

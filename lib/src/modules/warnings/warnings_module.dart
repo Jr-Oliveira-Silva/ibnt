@@ -17,14 +17,26 @@ class WarningsModule extends Module {
 
   @override
   void routes(RouteManager r) {
+    r.child('/:memberId',
+        child: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: Modular.get<UserBloc>()),
+                BlocProvider(create: (_) => Modular.get<CreateAnnouncementBloc>()),
+                BlocProvider(create: (_) => Modular.get<AnnouncementsBloc>()),
+              ],
+              child: const WarningsPage(),
+            ),
+        guards: [
+          UserGuard(redirectTo: './warnings_user'),
+        ]);
     r.child(
-      '/:memberId',
+      '/warnings_user',
       child: (_) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => Modular.get<CreateAnnouncementBloc>()),
           BlocProvider(create: (_) => Modular.get<AnnouncementsBloc>()),
         ],
-        child: const WarningsPage(),
+        child: const WarningsUserPage(),
       ),
     );
     r.child(

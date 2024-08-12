@@ -16,3 +16,4 @@ export 'package:app_ibnt/src/modules/warnings/view/widgets/announcement_date_wid
 export 'package:app_ibnt/src/modules/warnings/view/widgets/announcement_widget.dart';
 export 'package:app_ibnt/src/modules/warnings/warnings_module.dart';
 export 'package:app_ibnt/src/shared/cubits/date_cubit/date_cubit.dart';
+export 'package:app_ibnt/src/modules/warnings/view/pages/wanings_user_page.dart';

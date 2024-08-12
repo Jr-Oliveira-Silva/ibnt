@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:app_ibnt/src/app_imports.dart';
 
-class MemberDto extends BaseUserEntity{
+class MemberDto extends BaseUserEntity {
   MemberDto({
     required super.id,
     required super.fullName,

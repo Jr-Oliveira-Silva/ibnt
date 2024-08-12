@@ -1,10 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: must_be_immutable
 import 'package:app_ibnt/src/modules/bible_messages/bible_messages_imports.dart';
 
 class MessageMenuWidget extends StatefulWidget {
-  MessageMenuWidget({required this.getMemberMessagesBloc, super.key});
+  const MessageMenuWidget({Key? key, required this.memberId}) : super(key: key);
 
-  GetMemberMessagesBloc getMemberMessagesBloc;
+  // getMemberMessages getMemberMessages;
+  final String memberId;
   @override
   State<MessageMenuWidget> createState() => _MessageMenuWidgetState();
 }
@@ -13,30 +15,21 @@ int _currentIndex = 0;
 int _initialPage = 0;
 int _seccondPage = 1;
 
-late String _memberId;
-
-Future<void> _setUserData() async {
-  final preferences = await SharedPreferences.getInstance();
-  final userJson = preferences.getString("user");
-  if (userJson != null) {
-    final userMap = jsonDecode(userJson);
-    _memberId = userMap["id"];
-  }
-}
-
 PageController controller = PageController(initialPage: _initialPage);
 
 class _MessageMenuWidgetState extends State<MessageMenuWidget> {
   late UserBloc userBloc;
+  late GetMemberMessagesBloc getMemberMessages;
+
   @override
   void initState() {
     super.initState();
     userBloc = context.read<UserBloc>();
-    _setUserData().then((value) {
-      userBloc.add(GetMemberByIdEvent(_memberId));
-      _currentIndex = _initialPage;
-      widget.getMemberMessagesBloc.add(GetMemberMessagesEvent(_memberId));
-    });
+    getMemberMessages = context.read<GetMemberMessagesBloc>();
+
+    userBloc.add(GetMemberByIdEvent(widget.memberId));
+    _currentIndex = _initialPage;
+    getMemberMessages.add(GetMemberMessagesEvent(widget.memberId));
   }
 
   @override
@@ -128,7 +121,7 @@ class _MessageMenuWidgetState extends State<MessageMenuWidget> {
             ),
           ),
           BlocBuilder(
-            bloc: widget.getMemberMessagesBloc,
+            bloc: getMemberMessages,
             builder: (context, blocState) {
               if (blocState is GetMemberMessagesLoadingState) {
                 return const Expanded(
@@ -193,7 +186,7 @@ class _MessageMenuWidgetState extends State<MessageMenuWidget> {
                                           triggerMode: RefreshIndicatorTriggerMode.onEdge,
                                           onRefresh: () async {
                                             setState(() => _currentIndex = _initialPage);
-                                            widget.getMemberMessagesBloc.add(GetMemberMessagesEvent(_memberId));
+                                            getMemberMessages.add(GetMemberMessagesEvent(widget.memberId));
                                           },
                                           child: ListView.builder(
                                             itemCount: messagesList.length,
@@ -222,7 +215,7 @@ class _MessageMenuWidgetState extends State<MessageMenuWidget> {
                                           triggerMode: RefreshIndicatorTriggerMode.onEdge,
                                           onRefresh: () async {
                                             setState(() => _currentIndex = _initialPage);
-                                            widget.getMemberMessagesBloc.add(GetMemberMessagesEvent(_memberId));
+                                            getMemberMessages.add(GetMemberMessagesEvent(widget.memberId));
                                           },
                                           child: ListView.builder(
                                             itemCount: createdMessagesList.length,

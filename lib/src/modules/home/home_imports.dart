@@ -41,3 +41,5 @@ export 'package:app_ibnt/src/modules/home/blocs/common_event_bloc/common_event_b
 export 'package:app_ibnt/src/modules/home/view/widgets/event_reactions_widget.dart';
 export 'package:app_ibnt/src/modules/home/home_imports.dart';
 export 'package:app_ibnt/src/modules/home/dtos/member_dto.dart';
+export 'package:app_ibnt/src/modules/home/view/pages/home_page_user.dart';
+export 'package:app_ibnt/src/modules/home/guards/user_guard.dart';

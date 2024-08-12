@@ -79,7 +79,7 @@ class _AppNavBarWidgetState extends State<AppNavBarWidget> {
     });
     switch (value) {
       case 0:
-        Modular.to.pushNamed('/auth/home/profile/$_memberId');
+        Modular.to.navigate('/auth/home/profile/$_memberId');
         break;
       case 1:
         Modular.to.navigate('/auth/home/');

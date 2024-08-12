@@ -2,6 +2,7 @@
 //LIBS
 export 'dart:convert';
 export 'dart:developer' hide Flow;
+export 'dart:async';
 export 'dart:io';
 export 'dart:math' hide log;
 

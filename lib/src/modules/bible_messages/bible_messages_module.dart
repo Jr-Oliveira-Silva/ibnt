@@ -67,5 +67,16 @@ class BibleMessagesModule extends Module {
             message: r.args.data["message"],
           )),
     );
+
+    r.child(
+      '/message_view',
+      child: (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => Modular.get<BibleMessagesBloc>()),
+          ],
+          child: MessageViewPage(
+            message: r.args.data["message"],
+          )),
+    );
   }
 }
