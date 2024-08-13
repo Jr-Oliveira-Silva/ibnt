@@ -21,14 +21,24 @@ class DepartmentEntity {
   }
 
   Map<String, dynamic> createMap() {
+    List<Map<String, dynamic>> departmentMembers = members!.isNotEmpty
+        ? //
+        members!.map((member) => member.createDepartmentMap()).toList()
+        : [];
     return <String, dynamic>{
       'title': title,
+      'members': departmentMembers,
     };
   }
 
   factory DepartmentEntity.fromMap(Map<String, dynamic> map) {
+    List<DepartmentMember> members = [];
     final mapsList = map['members'] as List;
-    final List<DepartmentMember> members = mapsList.map((member) => DepartmentMember.fromMap(member)).toList();
+    for (var i = 0; i < mapsList.length; i++) {
+      final json = mapsList[i];
+      final member = DepartmentMember.fromMap(json);
+      members.add(member);
+    }
     return DepartmentEntity(
       id: map['id'],
       title: map['title'],

@@ -2,11 +2,10 @@
 import 'package:app_ibnt/src/app_imports.dart';
 
 class DepartmentMemberTile extends StatelessWidget {
-  const DepartmentMemberTile({Key? key, required this.member, required this.onTap}) : super(key: key);
+  const DepartmentMemberTile({Key? key, required this.member, required this.button}) : super(key: key);
 
   final DepartmentMember member;
-  final void Function() onTap;
-
+  final AppButton button;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -72,16 +71,7 @@ class DepartmentMemberTile extends StatelessWidget {
                     const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        AppButton(
-                          height: height * 0.035,
-                          width: width * 0.25,
-                          text: "Remover",
-                          primaryColor: Colors.white,
-                          backgroundColor: AppThemes.primaryColor1,
-                          onTap: onTap,
-                        ),
-                      ],
+                      children: [button],
                     ),
                   ],
                 ),

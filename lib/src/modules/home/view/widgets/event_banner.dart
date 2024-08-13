@@ -54,6 +54,7 @@ class EventBanner extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -103,7 +104,6 @@ class EventBanner extends StatelessWidget {
                       return Visibility(
                         visible: showOptions.value,
                         child: Container(
-                          height: widgetHeight * 0.55,
                           width: width * 0.45,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -116,7 +116,7 @@ class EventBanner extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                             child: Column(
                               children: [
-                                AppButton(
+                                /*   AppButton(
                                   height: 45,
                                   width: width,
                                   showBorder: true,
@@ -131,7 +131,7 @@ class EventBanner extends StatelessWidget {
                                   ),
                                   fontSize: 17,
                                 ),
-                                const Spacer(),
+                                const Spacer(), */
                                 AppButton(
                                   height: 45,
                                   width: width,

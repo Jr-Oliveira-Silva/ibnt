@@ -6,7 +6,8 @@ part 'user_states.dart';
 class UserBloc extends Bloc<UserEvents, UserStates> {
   UserBloc(this._repository) : super(UserInitialState()) {
     on<GetMemberByIdEvent>(_mapGetMemberByIdEventToState);
-    on<SetMemberProfileImageEvent>(_mapSetMemberProfileImageEvent);
+    on<GetMembersEvent>(_mapGetMembersEventToState);
+    on<SetMemberProfileImageEvent>(_mapSetMemberProfileImageEventToState);
   }
 
   final IHomeRepository _repository;
@@ -29,7 +30,17 @@ class UserBloc extends Bloc<UserEvents, UserStates> {
     );
   }
 
-  Future<void> _mapSetMemberProfileImageEvent(SetMemberProfileImageEvent event, Emitter<UserStates> state) async {
+  Future<void> _mapGetMembersEventToState(GetMembersEvent event, Emitter<UserStates> state) async {
+    state(GetUserLoadingUserState());
+    final (exception, members) = await _repository.getMembers();
+    if (exception != null) {
+      state(GetUserFailureUserState(exception.exception));
+    } else {
+      state(GetUsersSuccessState(members!));
+    }
+  }
+
+  Future<void> _mapSetMemberProfileImageEventToState(SetMemberProfileImageEvent event, Emitter<UserStates> state) async {
     state(GetUserLoadingUserState());
     final (exception, user) = await _repository.setUserImage(event.imageFile, event.memberId);
 

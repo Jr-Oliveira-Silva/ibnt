@@ -150,6 +150,9 @@ class _HomePageState extends State<HomePage> {
                                         if (timeLineData.type == EntityType.event) {
                                           final event = timeLineData as EventEntity;
                                           return EventTypeWidget(
+                                            onTap: () {
+                                              Modular.to.pushNamed('./event', arguments: event);
+                                            },
                                             event: event,
                                             reactions: EventReactionsWidget(
                                               eventReaction: EventReaction(

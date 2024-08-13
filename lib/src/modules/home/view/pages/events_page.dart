@@ -67,7 +67,7 @@ class _EventsPageState extends State<EventsPage> {
                               itemCount: events.length,
                               itemBuilder: (_, i) {
                                 return EventBanner(
-                                  widgetHeight: height * 0.19,
+                                  widgetHeight: height * 0.15,
                                   event: events[i],
                                   onTap: () => Modular.to.pushNamed("./event", arguments: events[i]),
                                 );

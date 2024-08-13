@@ -94,6 +94,29 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
+  Future<(HomeException?, List<BaseUserEntity>?)> getMembers() async {
+    try {
+      final response = await _appClient.get("$API_URL/members", headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer $user_token",
+      }) as Response;
+
+      if (response.statusCode != HttpStatus.ok) {
+        final message = response.body.toString();
+        return (UserException(exception: message), <BaseUserEntity>[]);
+      } else {
+        final membersJsonList = jsonDecode(response.body) as List;
+        final members = membersJsonList.map((memberMap) => userTypeDefinition(memberMap)).toList();
+        return (null, members);
+      }
+    } on HomeException catch (e) {
+      return (UserException(exception: "$e"), <BaseUserEntity>[]);
+    } catch (e) {
+      return (UserException(exception: "$e"), <BaseUserEntity>[]);
+    }
+  }
+
+  @override
   Future<(HomeException?, EventEntity?)> createEvent(EventEntity event) async {
     try {
       final eventMap = event.toMap();

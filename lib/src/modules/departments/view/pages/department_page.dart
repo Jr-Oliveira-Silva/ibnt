@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:app_ibnt/src/modules/departments/departments_imports.dart';
-import 'package:app_ibnt/src/modules/departments/view/widgets/department_member_tile.dart';
+import 'package:app_ibnt/src/app_imports.dart';
 
 class DepartmentPage extends StatefulWidget {
   const DepartmentPage({Key? key, required this.department}) : super(key: key);
@@ -98,20 +97,27 @@ class DepartmentPageState extends State<DepartmentPage> {
                                     final member = members[i];
                                     return DepartmentMemberTile(
                                       member: member,
-                                      onTap: () {
-                                        callAppDialog(
-                                          context,
-                                          "Remover Membro",
-                                          "Deseja remover ${member.fullName} do departamento ${widget.department.title}?",
-                                          () {
-                                            bloc.add(RemoveMemberFromDepartmentEvent(widget.department, member));
-                                            ScaffoldMessenger.of(context).clearMaterialBanners();
-                                          },
-                                          () {
-                                            ScaffoldMessenger.of(context).clearMaterialBanners();
-                                          },
-                                        );
-                                      },
+                                      button: AppButton(
+                                        height: height * 0.035,
+                                        width: width * 0.25,
+                                        text: "Remover",
+                                        primaryColor: Colors.white,
+                                        backgroundColor: AppThemes.primaryColor1,
+                                        onTap: () {
+                                          callAppDialog(
+                                            context,
+                                            "Remover Membro",
+                                            "Deseja remover ${member.fullName} do departamento ${widget.department.title}?",
+                                            () {
+                                              bloc.add(RemoveMemberFromDepartmentEvent(widget.department, member));
+                                              ScaffoldMessenger.of(context).clearMaterialBanners();
+                                            },
+                                            () {
+                                              ScaffoldMessenger.of(context).clearMaterialBanners();
+                                            },
+                                          );
+                                        },
+                                      ),
                                     );
                                   },
                                 );

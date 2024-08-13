@@ -7,7 +7,6 @@ class CreateMessagePage extends StatefulWidget {
   State<CreateMessagePage> createState() => _CreateMessagePageState();
 }
 
-int _pageIndex = 2;
 late NewMessageEntity newMessage;
 final _formKey = GlobalKey<FormState>();
 

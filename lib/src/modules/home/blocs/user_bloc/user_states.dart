@@ -23,3 +23,8 @@ final class GetUserSuccessState extends UserStates {
   BaseUserEntity user;
   GetUserSuccessState(this.user);
 }
+
+final class GetUsersSuccessState extends UserStates {
+  List<BaseUserEntity> users;
+  GetUsersSuccessState(this.users);
+}

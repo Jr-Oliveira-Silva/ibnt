@@ -55,7 +55,7 @@ class _MessageViewPageState extends State<MessageViewPage> {
                               fontFamily: 'Karma',
                             ),
                           ),
-                          widget.message.type == BibleMessageType.generated
+                          widget.message.messageType == BibleMessageType.generated
                               ? Container()
                               : Align(
                                   alignment: Alignment.centerLeft,

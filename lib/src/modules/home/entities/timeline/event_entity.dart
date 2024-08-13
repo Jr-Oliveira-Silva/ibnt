@@ -38,9 +38,12 @@ class EventEntity extends TimeLineContent {
 
   String eventDate() {
     final dateSection = date?.split("T").first;
-    final eventDay = int.parse(dateSection!.split("-").last);
-    final eventMonth = int.parse(dateSection.split("-")[1]);
-    final eventYear = int.parse(dateSection.split("-").first);
+    String eventDay = int.parse(dateSection!.split("-").last).toString();
+    String eventMonth = int.parse(dateSection.split("-")[1]).toString();
+    String eventYear = int.parse(dateSection.split("-").first).toString();
+
+    int.parse(eventDay) < 10 ? eventDay = "0$eventDay" : eventDay;
+    int.parse(eventMonth) < 10 ? eventMonth = "0$eventMonth" : eventMonth;
 
     return "$eventDay/$eventMonth/$eventYear";
   }

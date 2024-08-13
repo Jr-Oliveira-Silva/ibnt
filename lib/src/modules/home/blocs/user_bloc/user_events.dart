@@ -5,6 +5,10 @@ abstract class UserEvents extends Equatable {
   List<Object> get props => [];
 }
 
+final class GetMembersEvent extends UserEvents {
+  GetMembersEvent();
+}
+
 final class GetMemberByIdEvent extends UserEvents {
   final String memberId;
 

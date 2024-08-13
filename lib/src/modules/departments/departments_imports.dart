@@ -17,3 +17,4 @@ export 'package:app_ibnt/src/modules/departments/view/pages/departments_page.dar
 export 'package:app_ibnt/src/modules/departments/view/widgets/department_tile.dart';
 export 'package:app_ibnt/src/modules/departments/cubits/department_members_cubit/department_members_cubit.dart';
 export 'package:app_ibnt/src/modules/departments/blocs/remove_member_from_department_bloc/remove_member_from_department_bloc.dart';
+export 'package:app_ibnt/src/modules/departments/view/widgets/department_member_tile.dart';

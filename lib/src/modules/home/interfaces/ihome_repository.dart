@@ -4,6 +4,7 @@ abstract class IHomeRepository {
   Future<Either<HomeException, BaseUserEntity>> getMemberById(String memberId);
   Future<(HomeException?, BaseUserEntity?)> setUserImage(XFile imageFile, String id);
   Future<Either<HomeException, TimeLineEntity>> fetchTimeline();
+  Future<(HomeException?, List<BaseUserEntity>?)> getMembers();
   Future<(HomeException?, EventEntity?)> createEvent(EventEntity event);
   Future<(HomeException?, List<EventEntity>?)> getEvents();
   Future<(HomeException?, void)> deleteEvent(String eventId);

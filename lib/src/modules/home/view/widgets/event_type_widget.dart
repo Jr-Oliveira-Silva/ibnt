@@ -7,11 +7,13 @@ class EventTypeWidget extends StatelessWidget {
     required this.event,
     this.reactions,
     this.enableSimpleView = false,
+    this.onTap,
   }) : super(key: key);
 
   final EventEntity event;
   bool enableSimpleView;
   EventReactionsWidget? reactions;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -23,13 +25,11 @@ class EventTypeWidget extends StatelessWidget {
     final eventNameFontSize = height * 0.025;
     final eventDateFontSize = height * 0.017;
     final eventContentFontSize = height * 0.019;
-    
+
     return Column(
       children: [
         GestureDetector(
-          onTap: () {
-            Modular.to.pushNamed('./event', arguments: event);
-          },
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: SizedBox(

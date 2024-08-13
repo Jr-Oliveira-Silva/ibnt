@@ -7,7 +7,6 @@ class MessageGenerationPage extends StatefulWidget {
   State<MessageGenerationPage> createState() => _MessageGenerationPageState();
 }
 
-int _pageIndex = 2;
 final bibleVersions = ["acf", "apee", "bbe", "kjv", "nvi", "ra", "rvr"];
 final testaments = ["VT", "NT"];
 late NewMessageEntity newGeneratedMessage;

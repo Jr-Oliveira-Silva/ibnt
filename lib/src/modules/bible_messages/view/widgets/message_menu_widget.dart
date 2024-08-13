@@ -5,7 +5,6 @@ import 'package:app_ibnt/src/modules/bible_messages/bible_messages_imports.dart'
 class MessageMenuWidget extends StatefulWidget {
   const MessageMenuWidget({Key? key, required this.memberId}) : super(key: key);
 
-  // getMemberMessages getMemberMessages;
   final String memberId;
   @override
   State<MessageMenuWidget> createState() => _MessageMenuWidgetState();
@@ -28,8 +27,13 @@ class _MessageMenuWidgetState extends State<MessageMenuWidget> {
     getMemberMessages = context.read<GetMemberMessagesBloc>();
 
     userBloc.add(GetMemberByIdEvent(widget.memberId));
+
+    Future.delayed(const Duration(milliseconds: 300)).then(
+      (value) {
+        getMemberMessages.add(GetMemberMessagesEvent(widget.memberId));
+      },
+    );
     _currentIndex = _initialPage;
-    getMemberMessages.add(GetMemberMessagesEvent(widget.memberId));
   }
 
   @override
@@ -130,25 +134,26 @@ class _MessageMenuWidgetState extends State<MessageMenuWidget> {
               }
               if (blocState is GetMemberMessagesFailureState) {
                 return Expanded(
-                    child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_to_photos_outlined,
-                        color: AppThemes.primaryColor1,
-                        size: missingMessagesIconSize,
-                      ),
-                      SizedBox(height: height * 0.03),
-                      Text(
-                        "Nenhuma mensagem adicionada.",
-                        style: TextStyle(
-                          fontSize: noMessagesFontSize,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_to_photos_outlined,
+                          color: AppThemes.primaryColor1,
+                          size: missingMessagesIconSize,
                         ),
-                      )
-                    ],
+                        SizedBox(height: height * 0.03),
+                        Text(
+                          "Nenhuma mensagem adicionada.",
+                          style: TextStyle(
+                            fontSize: noMessagesFontSize,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ));
+                );
               }
               if (blocState is GetMemberMessagesSuccessState) {
                 return Expanded(

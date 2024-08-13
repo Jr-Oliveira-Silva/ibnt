@@ -30,7 +30,8 @@ class DepartmentsModule extends Module {
     r.child('/add_department',
         child: (_) => MultiBlocProvider(
               providers: [
-                BlocProvider(create: (_) => Modular.get<CreateDepartmentBloc>()),
+                BlocProvider(create: (_) => Modular.get<UserBloc>()),
+                BlocProvider.value(value: Modular.get<CreateDepartmentBloc>()),
               ],
               child: const AddDepartmentPage(),
             ));

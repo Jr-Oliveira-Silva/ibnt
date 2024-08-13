@@ -15,7 +15,6 @@ class _MessagesPageState extends State<MessagesPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final getMemberMessagesBloc = context.read<GetMemberMessagesBloc>();
 
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;

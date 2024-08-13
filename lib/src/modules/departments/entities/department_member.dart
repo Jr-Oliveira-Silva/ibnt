@@ -7,6 +7,7 @@ class DepartmentMember extends BaseUserEntity {
     required super.email,
     required super.profileImage,
   });
+
   factory DepartmentMember.fromMap(Map<String, dynamic> map) {
     return DepartmentMember(
       id: map["id"],
@@ -14,5 +15,22 @@ class DepartmentMember extends BaseUserEntity {
       email: map["credential"]["email"],
       profileImage: map["profileImage"],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": super.id,
+      "fullName": super.fullName,
+      "email": super.email,
+      "profileImage": super.profileImage,
+    };
+  }
+
+  Map<String, dynamic> createDepartmentMap() {
+    return {
+      "id": super.id,
+      "fullName": fullName,
+      "email": email,
+    };
   }
 }
