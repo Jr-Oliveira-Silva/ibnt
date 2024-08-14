@@ -14,6 +14,7 @@ class DepartmentsModule extends Module {
     i.addLazySingleton(RemoveDepartmentBloc.new);
     i.addLazySingleton(RemoveMemberFromDepartmentBloc.new);
     i.add(DepartmentMembersCubit.new);
+    i.add(AddMemberToDepartmentCubit.new);
   }
 
   @override
@@ -31,6 +32,8 @@ class DepartmentsModule extends Module {
         child: (_) => MultiBlocProvider(
               providers: [
                 BlocProvider(create: (_) => Modular.get<UserBloc>()),
+                BlocProvider.value(value: Modular.get<DepartmentMembersCubit>()),
+                BlocProvider(create: (_) => Modular.get<AddMemberToDepartmentCubit>()),
                 BlocProvider.value(value: Modular.get<CreateDepartmentBloc>()),
               ],
               child: const AddDepartmentPage(),

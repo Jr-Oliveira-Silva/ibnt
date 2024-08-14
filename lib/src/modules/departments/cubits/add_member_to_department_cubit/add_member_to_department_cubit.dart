@@ -1,7 +1,7 @@
 import 'package:app_ibnt/src/app_imports.dart';
 
 class AddMemberToDepartmentCubit extends Cubit<List<DepartmentMember>> {
-  AddMemberToDepartmentCubit(List<DepartmentMember> members) : super(members);
+  AddMemberToDepartmentCubit() : super([]);
 
   bool addedMember(DepartmentMember member) {
     return state.any((m) => m.email == member.email);
@@ -31,10 +31,13 @@ class AddMemberToDepartmentCubit extends Cubit<List<DepartmentMember>> {
 
   void filterMembers(String value, List<DepartmentMember> members) {
     List<DepartmentMember> filteredMembers = [];
-    filteredMembers = members.where((member) {
-      bool existingMember = member.fullName!.toLowerCase().contains(value.toLowerCase()) || member.email!.toLowerCase().contains(value.toLowerCase());
-      return existingMember;
-    }).toList();
+    filteredMembers.addAll(
+      members.where((member) {
+        bool existingMember = member.fullName!.toLowerCase().contains(value.toLowerCase()) || //
+            member.email!.toLowerCase().contains(value.toLowerCase());
+        return existingMember;
+      }).toList(),
+    );
 
     if (filteredMembers.isNotEmpty) {
       state.clear();

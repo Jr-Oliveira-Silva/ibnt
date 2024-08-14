@@ -49,86 +49,88 @@ class DepartmentPageState extends State<DepartmentPage> {
           }
         },
         builder: (context, blocState) {
-          return SizedBox(
-            height: height,
-            width: width,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: pagePadding),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      widget.department.title ?? "",
-                      style: TextStyle(
-                        fontSize: titleFontSize,
+          return SingleChildScrollView(
+            child: SizedBox(
+              height: height,
+              width: width,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: pagePadding),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        widget.department.title ?? "",
+                        style: TextStyle(
+                          fontSize: titleFontSize,
+                        ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextFieldLabel(
-                      label: "Membros",
-                      fontSize: fontSize,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextFieldLabel(
+                        label: "Membros",
+                        fontSize: fontSize,
+                      ),
                     ),
-                  ),
-                  AppSearchWidget(
-                    onChanged: (value) {
-                      cubit.filterMembers(value, widget.department.members!);
-                    },
-                  ),
-                  SizedBox(height: height * 0.01),
-                  widget.department.members!.isNotEmpty
-                      ? Visibility(
-                          visible: blocState is! RemoveMemberFromDepartmentLoadingState,
-                          replacement: const Expanded(
-                            child: Center(
-                              child: CircularProgressIndicator.adaptive(),
+                    AppSearchWidget(
+                      onChanged: (value) {
+                        cubit.filterMembers(value, widget.department.members!);
+                      },
+                    ),
+                    SizedBox(height: height * 0.01),
+                    widget.department.members!.isNotEmpty
+                        ? Visibility(
+                            visible: blocState is! RemoveMemberFromDepartmentLoadingState,
+                            replacement: const Expanded(
+                              child: Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
                             ),
-                          ),
-                          child: Expanded(
-                            child: BlocBuilder<DepartmentMembersCubit, List<DepartmentMember>>(
-                              bloc: cubit,
-                              builder: (context, state) {
-                                final members = state;
-                                return ListView.builder(
-                                  itemCount: members.length,
-                                  itemBuilder: (_, i) {
-                                    final member = members[i];
-                                    return DepartmentMemberTile(
-                                      member: member,
-                                      button: AppButton(
-                                        height: height * 0.035,
-                                        width: width * 0.25,
-                                        text: "Remover",
-                                        primaryColor: Colors.white,
-                                        backgroundColor: AppThemes.primaryColor1,
-                                        onTap: () {
-                                          callAppDialog(
-                                            context,
-                                            "Remover Membro",
-                                            "Deseja remover ${member.fullName} do departamento ${widget.department.title}?",
-                                            () {
-                                              bloc.add(RemoveMemberFromDepartmentEvent(widget.department, member));
-                                              ScaffoldMessenger.of(context).clearMaterialBanners();
-                                            },
-                                            () {
-                                              ScaffoldMessenger.of(context).clearMaterialBanners();
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
+                            child: Expanded(
+                              child: BlocBuilder<DepartmentMembersCubit, List<DepartmentMember>>(
+                                bloc: cubit,
+                                builder: (context, state) {
+                                  final members = state;
+                                  return ListView.builder(
+                                    itemCount: members.length,
+                                    itemBuilder: (_, i) {
+                                      final member = members[i];
+                                      return DepartmentMemberTile(
+                                        member: member,
+                                        button: AppButton(
+                                          height: height * 0.035,
+                                          width: width * 0.25,
+                                          text: "Remover",
+                                          primaryColor: Colors.white,
+                                          backgroundColor: AppThemes.primaryColor1,
+                                          onTap: () {
+                                            callAppDialog(
+                                              context,
+                                              "Remover Membro",
+                                              "Deseja remover ${member.fullName} do departamento ${widget.department.title}?",
+                                              () {
+                                                bloc.add(RemoveMemberFromDepartmentEvent(widget.department, member));
+                                                ScaffoldMessenger.of(context).clearMaterialBanners();
+                                              },
+                                              () {
+                                                ScaffoldMessenger.of(context).clearMaterialBanners();
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
+                          )
+                        : const Center(
+                            child: TransparentLogoWidget(),
                           ),
-                        )
-                      : const Center(
-                          child: TransparentLogoWidget(),
-                        ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

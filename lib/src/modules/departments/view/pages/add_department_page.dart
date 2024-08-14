@@ -1,5 +1,4 @@
 import 'package:app_ibnt/src/app_imports.dart';
-import 'package:app_ibnt/src/modules/departments/cubits/add_member_to_department_cubit/add_member_to_department_cubit.dart';
 
 class AddDepartmentPage extends StatefulWidget {
   const AddDepartmentPage({super.key});
@@ -13,13 +12,34 @@ class AddDepartmentPageState extends State<AddDepartmentPage> {
 
   late UserBloc homeBloc;
   late CreateDepartmentBloc createDepartmentBloc;
+  late DepartmentMembersCubit departmentMemberCubit;
+  late AddMemberToDepartmentCubit cubit;
 
   @override
   void initState() {
     super.initState();
     homeBloc = context.read<UserBloc>();
     createDepartmentBloc = context.read<CreateDepartmentBloc>();
+    departmentMemberCubit = context.read<DepartmentMembersCubit>();
+    cubit = context.read<AddMemberToDepartmentCubit>();
     homeBloc.add(GetMembersEvent());
+
+    homeBloc.stream.listen(
+      (state) {
+        if (state is GetUsersSuccessState) {
+          final members = state.users;
+          final departmentMembers = members
+              .map((member) => DepartmentMember(
+                    id: member.id,
+                    fullName: member.fullName,
+                    email: member.userCredential!.email,
+                    profileImage: member.profileImage,
+                  ))
+              .toList();
+          departmentMemberCubit.fillDepartmentMembersList(departmentMembers);
+        }
+      },
+    );
   }
 
   final formKey = GlobalKey<FormState>();
@@ -45,16 +65,6 @@ class AddDepartmentPageState extends State<AddDepartmentPage> {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
           if (state is GetUsersSuccessState) {
-            final members = state.users;
-            final departmentMembers = members
-                .map((member) => DepartmentMember(
-                      id: member.id,
-                      fullName: member.fullName,
-                      email: member.userCredential!.email,
-                      profileImage: member.profileImage,
-                    ))
-                .toList();
-            final cubit = AddMemberToDepartmentCubit([]);
             return SizedBox(
               height: height,
               width: width,
@@ -92,36 +102,50 @@ class AddDepartmentPageState extends State<AddDepartmentPage> {
                         fontSize: fontSize,
                       ),
                     ),
-                    /*  AppSearchWidget(
-                      onChanged: (value) {},
-                    ), */
-                    SizedBox(height: height * 0.01),
                     Expanded(
-                      child: BlocBuilder(
-                        bloc: cubit,
-                        builder: (context, state) {
-                          return ListView.builder(
-                            itemCount: members.length,
-                            itemBuilder: (_, i) {
-                              final departmentMember = departmentMembers[i];
+                      child: BlocBuilder<DepartmentMembersCubit, List<DepartmentMember>>(
+                        bloc: departmentMemberCubit,
+                        builder: (context, cubitState) {
+                          final list = cubitState;
+                          return Column(
+                            children: [
+                              AppSearchWidget(
+                                onChanged: (value) {
+                                  departmentMemberCubit.filterMembers(value, list);
+                                },
+                              ),
+                              SizedBox(height: height * 0.01),
+                              Expanded(
+                                child: BlocBuilder(
+                                  bloc: cubit,
+                                  builder: (context, state) {
+                                    return ListView.builder(
+                                      itemCount: list.length,
+                                      itemBuilder: (_, i) {
+                                        final departmentMember = list[i];
 
-                              return DepartmentMemberTile(
-                                member: departmentMember,
-                                button: AppButton(
-                                  showBorder: cubit.addedMember(departmentMember) ? true : false,
-                                  height: height * 0.035,
-                                  width: width * 0.25,
-                                  text: cubit.addedMember(departmentMember) ? "Remover" : "Adicionar",
-                                  primaryColor: cubit.addedMember(departmentMember) ? AppThemes.primaryColor1 : Colors.white,
-                                  backgroundColor: cubit.addedMember(departmentMember) ? Colors.white : AppThemes.primaryColor1,
-                                  onTap: () {
-                                    newDepartment.members!.clear();
-                                    cubit.defineDepartmentsMembersList(departmentMember);
-                                    newDepartment.members!.addAll(cubit.state);
+                                        return DepartmentMemberTile(
+                                          member: departmentMember,
+                                          button: AppButton(
+                                            showBorder: cubit.addedMember(departmentMember) ? true : false,
+                                            height: height * 0.035,
+                                            width: width * 0.25,
+                                            text: cubit.addedMember(departmentMember) ? "Remover" : "Adicionar",
+                                            primaryColor: cubit.addedMember(departmentMember) ? AppThemes.primaryColor1 : Colors.white,
+                                            backgroundColor: cubit.addedMember(departmentMember) ? Colors.white : AppThemes.primaryColor1,
+                                            onTap: () {
+                                              newDepartment.members!.clear();
+                                              cubit.defineDepartmentsMembersList(departmentMember);
+                                              newDepartment.members!.addAll(cubit.state);
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           );
                         },
                       ),
