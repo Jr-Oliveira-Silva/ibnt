@@ -25,7 +25,6 @@ class _SplashPageState extends State<SplashPage> {
       if (token != null) {
         bloc.add(VerifyTokenEvent(token ?? ""));
       } else {
-        await prefereces.clear();
         Modular.to.navigate('/auth/');
       }
     });

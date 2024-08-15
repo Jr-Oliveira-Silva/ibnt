@@ -14,7 +14,7 @@ class HomeRepository implements IHomeRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         var memberMap = jsonDecode(response.body) as Map<String, dynamic>;
         user = userTypeDefinition(memberMap);
         return right(user);
@@ -60,9 +60,9 @@ class HomeRepository implements IHomeRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.BAD_REQUEST) {
+      if (response.statusCode == HttpStatus.badRequest) {
         return left(TimeLineException(exception: response.body));
-      } else if (response.statusCode == StatusCodes.OK) {
+      } else if (response.statusCode == HttpStatus.ok) {
         final jsonTimeline = jsonDecode(response.body) as Map<String, dynamic>;
         final eventsJsonList = jsonTimeline["events"] as List;
         final messagesJsonList = jsonTimeline["bibleMessages"] as List;
@@ -220,7 +220,7 @@ class HomeRepository implements IHomeRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final reactionsList = jsonDecode(response.body) as List;
         for (var i = 0; i < reactionsList.length; i++) {
           final eventReaction = EventReactionResponse.fromMap(reactionsList[i]);
@@ -244,7 +244,7 @@ class HomeRepository implements IHomeRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final reactionsList = jsonDecode(response.body) as List;
         for (var i = 0; i < reactionsList.length; i++) {
           final bibleMessageReaction = BibleMessageReactionResponse.fromMap(reactionsList[i]);
@@ -294,7 +294,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final list = jsonDecode(response.body) as List;
         for (var i = 0; i < list.length; i++) {
           final eventReaction = EventReactionResponse.fromMap(list[i]);
@@ -320,7 +320,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final list = jsonDecode(response.body) as List;
         for (var i = 0; i < list.length; i++) {
           final bibleMessageReaction = BibleMessageReactionResponse.fromMap(list[i]);
@@ -344,7 +344,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         return await getEventsReactions();
       } else {
         final message = jsonDecode(response.body);
@@ -363,7 +363,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         return await getBibleMessagesReactions();
       } else {
         final message = jsonDecode(response.body);
@@ -382,7 +382,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.NO_CONTENT) {
+      if (response.statusCode == HttpStatus.noContent) {
         return await getEventsReactions();
       } else {
         final message = jsonDecode(response.body);
@@ -401,7 +401,7 @@ class HomeRepository implements IHomeRepository {
         "authorization": "Bearer $user_token",
       }) as Response;
 
-      if (response.statusCode == StatusCodes.NO_CONTENT) {
+      if (response.statusCode == HttpStatus.noContent) {
         return await getBibleMessagesReactions();
       } else {
         final message = jsonDecode(response.body);

@@ -12,9 +12,9 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.NOT_FOUND) {
+      if (response.statusCode == HttpStatus.notFound) {
         return left(GetMessagesException(exception: response.body));
-      } else if (response.statusCode == StatusCodes.OK) {
+      } else if (response.statusCode == HttpStatus.ok) {
         final jsonMemberMessages = jsonDecode(response.body) as List;
         for (var i = 0; i < jsonMemberMessages.length; i++) {
           var jsonMemberMessage = jsonMemberMessages[i];
@@ -39,7 +39,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.CREATED) {
+      if (response.statusCode == HttpStatus.created) {
         final bibleMessageMap = jsonDecode(response.body) as Map<String, dynamic>;
         final bibleMessage = BibleMessageEntity.fromMap(bibleMessageMap);
         return right(bibleMessage);
@@ -79,7 +79,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final bibleMessageMap = jsonDecode(response.body) as Map<String, dynamic>;
         final bibleMessage = BibleMessageEntity.fromMap(bibleMessageMap);
         return right(bibleMessage);
@@ -98,7 +98,7 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
         "Content-Type": "Application/json",
         "Authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.BAD_REQUEST) {
+      if (response.statusCode == HttpStatus.badRequest) {
         return (PostMessageToTimelineException(exception: "A mensagem já existe na timeline."), null);
       } else {
         return (null, null);
@@ -111,8 +111,15 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
   Future<int> chapterSelector(String book) async {
     try {
       final randomValues = Random();
-      final booksResponse = await _appClient.get("$BIBLE_API_URL/books/$book") as Response;
-      if (booksResponse.statusCode == StatusCodes.OK) {
+      final booksResponse = await _appClient.get(
+        "$BIBLE_API_URL/books/$book",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $bible_api_user_token',
+        },
+      ) as Response;
+      if (booksResponse.statusCode == HttpStatus.ok) {
         final bookMap = jsonDecode(booksResponse.body) as Map<String, dynamic>;
         int generatedChapter = randomValues.nextInt(bookMap["chapters"]);
         int chapter = generatedChapter > 0 ? generatedChapter : (generatedChapter + 1);
@@ -130,8 +137,15 @@ class BibleMessagesRepository implements IBibleMessagesRepository {
       final random = Random();
       final versesList = <String>[];
 
-      final response = await _appClient.get("$BIBLE_API_URL/verses/$bibleVersion/$book/$chapter") as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      final response = await _appClient.get(
+        "$BIBLE_API_URL/verses/$bibleVersion/$book/$chapter",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $bible_api_user_token',
+        },
+      ) as Response;
+      if (response.statusCode == HttpStatus.ok) {
         final verseMap = jsonDecode(response.body) as Map<String, dynamic>;
         final chapterVerses = verseMap["verses"] as List;
         for (var i = 0; i < chapterVerses.length; i++) {

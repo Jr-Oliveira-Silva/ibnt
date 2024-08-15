@@ -20,10 +20,10 @@ class AuthRepository implements IAuthRepository {
         body: authMap,
         headers: {"content-type": "application/json"},
       ) as Response;
-      if (response.statusCode == StatusCodes.BAD_REQUEST) {
+      if (response.statusCode == HttpStatus.badRequest) {
         final message = jsonDecode(response.body);
         return left(CreateMemberException(exception: message));
-      } else if (response.statusCode == StatusCodes.CREATED) {
+      } else if (response.statusCode == HttpStatus.created) {
         final body = jsonDecode(response.body) as Map<String, dynamic>;
         final userRole = body["credential"]["role"] == "user" ? UserRole.user : UserRole.admin;
         final authResponseEntity = AuthResponseEntity(
@@ -73,7 +73,7 @@ class AuthRepository implements IAuthRepository {
         headers: {"content-type": "application/json"},
       ) as Response;
 
-      if (apiSignInAttempt.statusCode != StatusCodes.OK) {
+      if (apiSignInAttempt.statusCode != HttpStatus.ok) {
         CreateUserEntity newUserEntity = CreateUserEntity(
           fullName: signInResult.user?.displayName ?? "",
           profileImage: signInResult.user?.photoURL,
@@ -125,7 +125,7 @@ class AuthRepository implements IAuthRepository {
         body: userData,
         headers: {"content-type": "application/json"},
       ) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final body = jsonDecode(response.body) as Map<String, dynamic>;
         final userRole = body["role"] == "user" ? UserRole.user : UserRole.admin;
         final authResponseEntity = AuthResponseEntity(
@@ -155,7 +155,7 @@ class AuthRepository implements IAuthRepository {
         body: emailMap,
         headers: {"content-type": "application/json"},
       ) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final body = jsonDecode(response.body) as Map<String, dynamic>;
         final recoveryEntity = AuthRecoveryEntity(
           fullName: body["fullName"],
@@ -182,7 +182,7 @@ class AuthRepository implements IAuthRepository {
         body: recoveryData,
         headers: {"content-type": "application/json"},
       ) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         return right(null);
       } else {
         return left(AuthException(exception: "Erro ao redefinir nova senha."));
@@ -194,8 +194,8 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<void> signOut() async {
-    var prefereces = await SharedPreferences.getInstance();
-    await prefereces.clear();
+    final preferences = await SharedPreferences.getInstance();
+    preferences.remove('token');
     await _googleSignIn.signOut();
   }
 
@@ -207,7 +207,7 @@ class AuthRepository implements IAuthRepository {
         body: apiUserEntity.toMap(),
         headers: {"content-type": "application/json"},
       ) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final apiResponse = jsonDecode(response.body) as Map;
         final apiUserToken = apiResponse["token"];
         await prefereces.setString('bible_api_user_token', apiUserToken);

@@ -3,7 +3,6 @@ import 'package:app_ibnt/src/modules/home/home_imports.dart';
 class HomeModule extends Module {
   @override
   List<Module> get imports => [
-        AppModule(),
         AuthModule(),
       ];
 

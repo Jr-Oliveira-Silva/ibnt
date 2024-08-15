@@ -116,7 +116,7 @@ class EventBanner extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                             child: Column(
                               children: [
-                                /*   AppButton(
+                                /* AppButton(
                                   height: 45,
                                   width: width,
                                   showBorder: true,
@@ -138,7 +138,7 @@ class EventBanner extends StatelessWidget {
                                   showBorder: true,
                                   primaryColor: AppThemes.primaryColor1,
                                   text: "Excluir",
-                                  onTap: () {
+                                  onTap: () async {
                                     callAppDialog(
                                       context,
                                       "Excluir Evento",
@@ -167,8 +167,10 @@ class EventBanner extends StatelessWidget {
                     }),
                   ),
                   IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       showOptions.value = true;
+                      await Future.delayed(const Duration(seconds: 3));
+                      showOptions.value = false;
                     },
                     icon: const Icon(Icons.menu_rounded),
                   ),

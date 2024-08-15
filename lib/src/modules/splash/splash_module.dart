@@ -3,7 +3,7 @@ import 'package:app_ibnt/src/modules/splash/splash_imports.dart';
 class SplashModule extends Module {
   @override
   List<Module> get imports => [
-        AppModule(),
+        CommonModule(),
       ];
   @override
   void binds(Injector i) {

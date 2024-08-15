@@ -16,7 +16,7 @@ class NotificationsService {
       final userMap = jsonDecode(userJson);
       memberId = userMap["id"];
     }
-    Modular.to.navigate("./bible_messages/$memberId");
+    Modular.to.navigate("/auth/home/bible_messages/$memberId");
   }
 
   static Future<void> initializeNotifications() async {
@@ -60,6 +60,6 @@ class NotificationsService {
       final userMap = jsonDecode(userJson);
       memberId = userMap["id"];
     }
-    Modular.to.navigate("./bible_messages/$memberId");
+    Modular.to.navigate("/auth/home/bible_messages/$memberId");
   }
 }

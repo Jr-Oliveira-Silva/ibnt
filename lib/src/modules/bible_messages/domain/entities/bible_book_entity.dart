@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
-import 'package:app_ibnt/src/modules/bible_messages/entities/abbreviation.dart';
+import 'package:app_ibnt/src/app_imports.dart';
 
 class BibleBookEntity {
   Abbreviation abbrev;

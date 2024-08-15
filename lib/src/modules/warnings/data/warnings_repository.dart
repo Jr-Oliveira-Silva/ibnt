@@ -11,7 +11,7 @@ class WarningsRepository implements IWarningsRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.CREATED) {
+      if (response.statusCode == HttpStatus.created) {
         final announcementMap = jsonDecode(response.body) as Map<String, dynamic>;
         final announcement = AnnouncementEntity.fromMap(announcementMap);
         return (null, announcement);
@@ -34,7 +34,7 @@ class WarningsRepository implements IWarningsRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.CREATED) {
+      if (response.statusCode == HttpStatus.created) {
         return (null, null);
       } else {
         return (CreateAnnouncementException(exception: "Não foi possível adicionar anúncios em série. Erro: ${response.body}"), null);
@@ -52,7 +52,7 @@ class WarningsRepository implements IWarningsRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode == StatusCodes.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         final mapsList = jsonDecode(response.body) as List;
 
         for (var i = 0; i < mapsList.length; i++) {
@@ -83,7 +83,7 @@ class WarningsRepository implements IWarningsRepository {
         "content-type": "application/json",
         "authorization": "Bearer $user_token",
       }) as Response;
-      if (response.statusCode != StatusCodes.OK) {
+      if (response.statusCode != HttpStatus.ok) {
         return (DeleteAnnouncementException(exception: "Não foi possível deletar o anúncio. Erro: ${response.body}"), null);
       } else {
         return (null, null);

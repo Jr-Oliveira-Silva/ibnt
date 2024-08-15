@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final width = MediaQuery.sizeOf(context).width;
     final titleFontSize = height * 0.035;
     final pagePadding = width * 0.035;
-    final cameraIconSize = height * 0.04;
+    final cameraIconSize = height * 0.03;
     final profileContainerSize = height * 0.20;
     final profileNameFontSize = height * 0.036;
     final profileEmailFontSize = height * 0.018;

@@ -16,11 +16,3 @@ Future<void> setUserTokenToGlobalVariable(String token, String? bibleApitoken) a
     log("API_USER_TOKEN: $bible_api_user_token");
   }
 }
-
-abstract class StatusCodes {
-  static int OK = 200;
-  static int CREATED = 201;
-  static int NO_CONTENT = 204;
-  static int BAD_REQUEST = 400;
-  static int NOT_FOUND = 404;
-}
