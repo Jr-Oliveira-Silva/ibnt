@@ -83,7 +83,7 @@ class HomeModule extends Module {
     r.module('/warnings', module: WarningsModule(), transition: TransitionType.fadeIn);
     r.module('/posts', module: PostsModule(), transition: TransitionType.fadeIn);
     r.module('/departments', module: DepartmentsModule(), transition: TransitionType.fadeIn);
-    r.module('/scheduling', module: SchedulingModule(), transition: TransitionType.fadeIn);
+    r.module('/scale', module: ScaleModule(), transition: TransitionType.fadeIn);
   }
 
   final userGuard = UserGuard(redirectTo: './home_user');

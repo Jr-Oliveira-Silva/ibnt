@@ -127,6 +127,7 @@ class AddDepartmentPageState extends State<AddDepartmentPage> {
                                         return DepartmentMemberTile(
                                           member: departmentMember,
                                           button: AppButton(
+                                            fontSize: height * 0.011,
                                             showBorder: cubit.addedMember(departmentMember) ? true : false,
                                             height: height * 0.035,
                                             width: width * 0.25,

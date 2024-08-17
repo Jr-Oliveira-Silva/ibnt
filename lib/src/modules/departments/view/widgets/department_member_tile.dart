@@ -9,7 +9,6 @@ class DepartmentMemberTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
     final containerGeneralSize = height * 0.095;
     const memberNameFontSize = 32.0;
     const memberInfoFontSize = 16.0;
@@ -19,8 +18,6 @@ class DepartmentMemberTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: externalPadding),
       child: SizedBox(
-        height: height * 0.13,
-        width: width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,17 +58,21 @@ class DepartmentMemberTile extends StatelessWidget {
                         fontSize: memberNameFontSize,
                       ),
                     ),
-                    Text(
-                      member.email ?? "",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: memberInfoFontSize,
-                      ),
-                    ),
                     const SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [button],
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            member.email ?? "",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: memberInfoFontSize,
+                            ),
+                          ),
+                        ),
+                        button
+                      ],
                     ),
                   ],
                 ),

@@ -99,6 +99,7 @@ class DepartmentPageState extends State<DepartmentPage> {
                                       return DepartmentMemberTile(
                                         member: member,
                                         button: AppButton(
+                                          fontSize: height * 0.011,
                                           height: height * 0.035,
                                           width: width * 0.25,
                                           text: "Remover",

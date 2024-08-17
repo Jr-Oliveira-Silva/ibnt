@@ -25,30 +25,6 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: AppDrawer(
-        drawerOptions: [
-          AppDrawerTile(
-            tileName: 'Perfil',
-            leadingIcon: Icons.person_2_outlined,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Departamentos',
-            leadingIcon: Icons.file_copy_outlined,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Eventos',
-            leadingIcon: Icons.event,
-            onTap: () {},
-          ),
-          AppDrawerTile(
-            tileName: 'Escalas',
-            leadingIcon: Icons.view_comfortable_outlined,
-            onTap: () {},
-          ),
-        ],
-      ),
       appBar: AppBarWidget(preferredSize: Size(width, height * 0.08)),
       body: SizedBox(
         height: height,
@@ -87,12 +63,23 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                     builder: (context, state) {
                       return IconButton(
                           onPressed: () {
-                            if (!bloc.isClosed) {
-                              bloc.add(DeleteAnnouncementEvent(widget.announcement));
-                            } else {
-                              final bloc = context.read<AnnouncementsBloc>();
-                              bloc.add(DeleteAnnouncementEvent(widget.announcement));
-                            }
+                            callAppDialog(
+                              context,
+                              'Excluir Aviso',
+                              'Deseja excluir ${widget.announcement.title} do quadro de avisos?',
+                              () {
+                                if (!bloc.isClosed) {
+                                  bloc.add(DeleteAnnouncementEvent(widget.announcement));
+                                } else {
+                                  final bloc = context.read<AnnouncementsBloc>();
+                                  bloc.add(DeleteAnnouncementEvent(widget.announcement));
+                                }
+                                ScaffoldMessenger.of(context).clearMaterialBanners();
+                              },
+                              () {
+                                ScaffoldMessenger.of(context).clearMaterialBanners();
+                              },
+                            );
                           },
                           icon: Container(
                             height: iconButtonSize,

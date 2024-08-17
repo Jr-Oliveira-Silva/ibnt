@@ -1,6 +1,6 @@
-import 'package:app_ibnt/src/modules/scheduling/scheduling_imports.dart';
+import 'package:app_ibnt/src/modules/scale/scale_imports.dart';
 
-class SchedulingModule extends Module {
+class ScaleModule extends Module {
   @override
   List<Module> get imports => [
         HomeModule(),

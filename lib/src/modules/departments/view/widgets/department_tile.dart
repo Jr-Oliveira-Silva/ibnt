@@ -44,7 +44,6 @@ class _DepartmentTileState extends State<DepartmentTile> {
             SizedBox(width: componentsSeparatorSize),
             Expanded(
               child: Container(
-                height: containerGeneralSize,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(tileRadius),
                   border: Border.all(color: AppThemes.primaryColor1, width: 1),

@@ -21,7 +21,7 @@ class NotificationsService {
 
   static Future<void> initializeNotifications() async {
     _firebaseMessaging.setAutoInitEnabled(true);
-    await _firebaseMessaging.subscribeToTopic("bible_messages");
+    await _firebaseMessaging.subscribeToTopic("bibleMessages");
 
     RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
 

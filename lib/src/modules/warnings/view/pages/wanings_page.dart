@@ -8,6 +8,7 @@ class WarningsPage extends StatefulWidget {
 }
 
 class _WarningsPageState extends State<WarningsPage> {
+  final int _pageIndex = 3;
   final _memberId = Modular.args.params["memberId"];
 
   @override
@@ -41,7 +42,10 @@ class _WarningsPageState extends State<WarningsPage> {
                 );
               }
               if (state is AnnouncementsSuccessState) {
-                final announcements = state.announcements;
+                final announcements = state.announcements //
+                    .where((announcement) => announcement.setAnnouncementMonth(announcement.dateString) == DateTime.now().month)
+                    .toList();
+
                 return Column(
                   children: [
                     MonthTitleWidget(month: DateTime.now().month),
@@ -80,7 +84,7 @@ class _WarningsPageState extends State<WarningsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: AppNavBarWidget(pageIndex: 3),
+      bottomNavigationBar: AppNavBarWidget(pageIndex: _pageIndex),
     );
   }
 }

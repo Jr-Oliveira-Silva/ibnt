@@ -1,4 +1,4 @@
-import 'package:app_ibnt/src/modules/scheduling/scheduling_imports.dart';
+import 'package:app_ibnt/src/modules/scale/scale_imports.dart';
 
 class SchedulesPage extends StatefulWidget {
   const SchedulesPage({super.key});

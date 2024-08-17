@@ -1,8 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 //LIBS
+export 'dart:async';
 export 'dart:convert';
 export 'dart:developer' hide Flow;
-export 'dart:async';
 export 'dart:io';
 export 'dart:math' hide log;
 
@@ -11,13 +11,13 @@ export 'package:app_ibnt/firebase_options.dart';
 export 'package:app_ibnt/src/app_module.dart';
 export 'package:app_ibnt/src/app_widget.dart';
 export 'package:app_ibnt/src/backend/api.dart';
+export 'package:app_ibnt/src/mocks/mock_imports.dart';
 export 'package:app_ibnt/src/modules/auth/auth_imports.dart';
 export 'package:app_ibnt/src/modules/bible_messages/bible_messages_imports.dart';
 export 'package:app_ibnt/src/modules/departments/departments_imports.dart';
 export 'package:app_ibnt/src/modules/home/home_imports.dart';
 export 'package:app_ibnt/src/modules/posts/posts_imports.dart';
-export 'package:app_ibnt/src/modules/scheduling/scheduling_imports.dart';
-export 'package:app_ibnt/src/mocks/mock_imports.dart';
+export 'package:app_ibnt/src/modules/scale/scale_imports.dart';
 //MODULES
 export 'package:app_ibnt/src/modules/splash/splash_imports.dart';
 export 'package:app_ibnt/src/modules/warnings/warnings_imports.dart';

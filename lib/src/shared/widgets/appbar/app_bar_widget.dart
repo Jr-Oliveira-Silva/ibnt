@@ -41,7 +41,7 @@ class AppBarWidget extends PreferredSize {
           ],
         ),
       ),
-      actions: actions,
+      // actions: actions,
     );
   }
 }

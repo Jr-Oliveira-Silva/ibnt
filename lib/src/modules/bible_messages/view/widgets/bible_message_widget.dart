@@ -21,7 +21,7 @@ class BibleMessageWidget extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final widgetHeight = height * 0.2;
     final imageContainerSize = height * 0.075;
-    final iconSize = height * 0.033;
+    // final iconSize = height * 0.033;
     final memberNameFontSize = height * 0.02;
     final messageTitleFontSize = height * 0.026;
     final postContentFontSize = height * 0.017;
@@ -62,7 +62,7 @@ class BibleMessageWidget extends StatelessWidget {
                               )),
                       ),
                     ),
-                    message.messageType == BibleMessageType.created
+                    /* message.messageType == BibleMessageType.created
                         ? IconButton(
                             onPressed: () {},
                             icon: Icon(
@@ -71,7 +71,7 @@ class BibleMessageWidget extends StatelessWidget {
                               color: AppThemes.primaryColor1,
                             ),
                           )
-                        : Container()
+                        : Container() */
                   ],
                 ),
               ),

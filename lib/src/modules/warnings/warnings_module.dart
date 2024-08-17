@@ -17,18 +17,18 @@ class WarningsModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/:memberId',
-        child: (_) => MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: Modular.get<UserBloc>()),
-                BlocProvider(create: (_) => Modular.get<CreateAnnouncementBloc>()),
-                BlocProvider(create: (_) => Modular.get<AnnouncementsBloc>()),
-              ],
-              child: const WarningsPage(),
-            ),
-        guards: [
-          UserGuard(redirectTo: './warnings_user'),
-        ]);
+    r.child(
+      '/:memberId',
+      child: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: Modular.get<UserBloc>()),
+          BlocProvider(create: (_) => Modular.get<CreateAnnouncementBloc>()),
+          BlocProvider(create: (_) => Modular.get<AnnouncementsBloc>()),
+        ],
+        child: const WarningsPage(),
+      ),
+      guards: [userGuard],
+    );
     r.child(
       '/warnings_user',
       child: (_) => MultiBlocProvider(
@@ -60,4 +60,6 @@ class WarningsModule extends Module {
       ),
     );
   }
+
+  final userGuard = UserGuard(redirectTo: './warnings_user');
 }
