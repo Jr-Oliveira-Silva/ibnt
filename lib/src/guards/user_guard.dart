@@ -5,8 +5,8 @@ class UserGuard extends RouteGuard {
 
   @override
   FutureOr<bool> canActivate(String path, ParallelRoute route) async {
-    var prefereces = await SharedPreferences.getInstance();
-    final userData = jsonDecode(prefereces.getString("user") ?? '{}') as Map;
+    var preferences = await SharedPreferences.getInstance();
+    final userData = jsonDecode(preferences.getString("user") ?? '{}') as Map;
     return userData["role"] == "admin";
   }
 }

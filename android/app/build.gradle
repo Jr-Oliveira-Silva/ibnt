@@ -56,22 +56,22 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword  keystoreProperties['storePassword']
-        }
-
-        debug {
-            keyAlias keystoreProperties['keyAliasDebug']
-            keyPassword keystoreProperties['keyPasswordDebug']
-            storeFile file(keystoreProperties['storeFileDebug'])
-            storePassword  keystoreProperties['storePasswordDebug']
-        }
-    }
+//
+//    signingConfigs {
+//        release {
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storeFile file(keystoreProperties['storeFile'])
+//            storePassword  keystoreProperties['storePassword']
+//        }
+//
+//        debug {
+//            keyAlias keystoreProperties['keyAliasDebug']
+//            keyPassword keystoreProperties['keyPasswordDebug']
+//            storeFile file(keystoreProperties['storeFileDebug'])
+//            storePassword  keystoreProperties['storePasswordDebug']
+//        }
+//    }
 
     buildTypes {
         release {

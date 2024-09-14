@@ -78,7 +78,10 @@ class _HomePageState extends State<HomePage> {
           AppDrawerTile(
             tileName: 'Escalas',
             leadingIcon: Icons.view_comfortable_outlined,
-            onTap: () {},
+            onTap: () {
+              Modular.to.pushNamed('./scale');
+              Navigator.of(context).pop();
+            },
           ),
         ],
       ),
@@ -140,18 +143,23 @@ class _HomePageState extends State<HomePage> {
                                   child: RefreshIndicator(
                                     onRefresh: () async {
                                       homeBloc.add(FetchTimelineEvent());
-                                      eventsReactionsBloc.add(FetchEventsReactionsEvent());
-                                      bibleMessagesReactionsBloc.add(FetchBibleMessagesReactionsEvent());
+                                      eventsReactionsBloc
+                                          .add(FetchEventsReactionsEvent());
+                                      bibleMessagesReactionsBloc.add(
+                                          FetchBibleMessagesReactionsEvent());
                                     },
                                     child: ListView.builder(
                                       itemCount: timeLine.length,
                                       itemBuilder: (_, i) {
                                         var timeLineData = timeLine[i];
-                                        if (timeLineData.type == EntityType.event) {
-                                          final event = timeLineData as EventEntity;
+                                        if (timeLineData.type ==
+                                            EntityType.event) {
+                                          final event =
+                                              timeLineData as EventEntity;
                                           return EventTypeWidget(
                                             onTap: () {
-                                              Modular.to.pushNamed('./event', arguments: event);
+                                              Modular.to.pushNamed('./event',
+                                                  arguments: event);
                                             },
                                             event: event,
                                             reactions: EventReactionsWidget(
@@ -163,18 +171,27 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           );
                                         }
-                                        if (timeLineData.type == EntityType.message) {
-                                          final message = timeLineData as MessageEntity;
+                                        if (timeLineData.type ==
+                                            EntityType.message) {
+                                          final message =
+                                              timeLineData as MessageEntity;
                                           return MessageTypeWidget(
                                             message: message,
                                             onTap: () {
-                                              Modular.to.pushNamed('./bible_messages/message_view', arguments: {"message": message});
+                                              Modular.to.pushNamed(
+                                                  './bible_messages/message_view',
+                                                  arguments: {
+                                                    "message": message
+                                                  });
                                             },
                                           );
                                         }
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 2.5),
-                                          child: Container(height: height * 0.15, color: AppThemes.secondaryColor1),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 2.5),
+                                          child: Container(
+                                              height: height * 0.15,
+                                              color: AppThemes.secondaryColor1),
                                         );
                                       },
                                     ),
